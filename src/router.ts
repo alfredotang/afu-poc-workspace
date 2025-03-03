@@ -15,10 +15,9 @@ const router = createRouter({
 export default router
 
 router.beforeEach((to, _from, next) => {
-  const { isAdmin } = useStoreRefs()
-  if (to.name === '/admin/' && !isAdmin.value) {
-    alert('You are not an admin!')
-    return next({ name: '/callback/' })
+  const { isOwner } = useStoreRefs()
+  if (to.meta.requiresOwner && !isOwner.value) {
+    return next({ name: '/401' })
   }
   next()
 })

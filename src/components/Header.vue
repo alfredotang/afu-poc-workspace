@@ -13,13 +13,13 @@
         </button>
       </router-link>
     </nav>
-    <AdminButton />
+    <Login />
   </header>
 </template>
 
 <script setup lang="ts">
 import type { RouteRecordName } from 'vue-router'
-import AdminButton from '@/components/AdminButton.vue'
+import Login from '@/components/Login.vue'
 import { cn } from '@/libs/class-name'
 
 const routes: Array<{ label: string; name: RouteRecordName }> = [

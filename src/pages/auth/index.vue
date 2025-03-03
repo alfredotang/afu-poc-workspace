@@ -1,8 +1,8 @@
-<template>admin</template>
+<template>auth root</template>
 <script lang="ts" setup>
 definePage({
   meta: {
-    requiresOwner: true,
+    layout: 'auth',
   },
 })
 </script>

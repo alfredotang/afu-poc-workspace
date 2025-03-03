@@ -12,7 +12,7 @@
           :data-prefix="index + 1"
           v-for="([key, value], index) in metaStruct"
           :key="key"
-          class="whitespace-nowrap grid grid-cols-[calc(2rem+2ch)_100px_200px_auto]"
+          class="whitespace-nowrap grid grid-cols-[calc(2rem+2ch)_200px_200px_auto]"
         >
           <code class="text-success" v-text="key"/>         
           <code class="text-warning" v-text="mapRouteConfigValueDisplay(value)" />
