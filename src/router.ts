@@ -15,9 +15,13 @@ const router = createRouter({
 export default router
 
 router.beforeEach((to, _from, next) => {
-  const { isOwner } = useStoreRefs()
+  const { isOwner, isLoggedIn } = useStoreRefs()
   if (to.meta.requiresOwner && !isOwner.value) {
     return next({ name: '/401' })
+  }
+
+  if (!isLoggedIn.value && !to.meta.isPublic) {
+    return next({ name: '/auth/signin' })
   }
   next()
 })

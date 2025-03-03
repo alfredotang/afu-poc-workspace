@@ -1,6 +1,6 @@
 <template>
   <div
-    class="max-w-screen-lg mx-auto flex justify-center items-center min-h-screen flex-col"
+    class="max-w-screen-lg mx-auto flex justify-center items-center flex-col"
   >
     <select
       class="select select-bordered w-full max-w-xs"
@@ -30,6 +30,7 @@ import { computed } from 'vue'
 definePage({
   meta: {
     layout: 'auth',
+    isPublic: true,
   },
 })
 

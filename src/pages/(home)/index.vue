@@ -10,6 +10,7 @@ import HomeDetail from './_content/HomeDetail.vue'
 definePage({
   meta: {
     title: 'Hello world',
+    isPublic: true,
   },
   name: 'my-homie',
 })
