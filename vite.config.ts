@@ -6,7 +6,8 @@ import Layouts from 'vite-plugin-vue-layouts'
 import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
+  base: mode === 'production' ? '/afu-vue-practice' : undefined,
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
@@ -43,4 +44,4 @@ export default defineConfig({
     vue(),
     vueDevTools(),
   ],
-})
+}))
