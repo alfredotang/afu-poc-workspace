@@ -27,8 +27,13 @@ declare module 'vue-router/auto-routes' {
     '/auth/signin': RouteRecordInfo<'/auth/signin', '/auth/signin', Record<never, never>, Record<never, never>>,
     '/callback/': RouteRecordInfo<'/callback/', '/callback', Record<never, never>, Record<never, never>>,
     '/callback/[time]': RouteRecordInfo<'/callback/[time]', '/callback/:time', { time: ParamValue<true> }, { time: ParamValue<false> }>,
-    '/cart/': RouteRecordInfo<'/cart/', '/cart', Record<never, never>, Record<never, never>>,
+    '/cart': RouteRecordInfo<'/cart', '/cart', Record<never, never>, Record<never, never>>,
     '/cart/failed': RouteRecordInfo<'/cart/failed', '/cart/failed', Record<never, never>, Record<never, never>>,
     '/cart/success': RouteRecordInfo<'/cart/success', '/cart/success', Record<never, never>, Record<never, never>>,
+    '/user-console/bare-metal/': RouteRecordInfo<'/user-console/bare-metal/', '/user-console/bare-metal', Record<never, never>, Record<never, never>>,
+    '/user-console/bare-metal/[id]': RouteRecordInfo<'/user-console/bare-metal/[id]', '/user-console/bare-metal/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
+    '/user-console/bare-metal/create/': RouteRecordInfo<'/user-console/bare-metal/create/', '/user-console/bare-metal/create', Record<never, never>, Record<never, never>>,
+    '/user-console/resource-overview/': RouteRecordInfo<'/user-console/resource-overview/', '/user-console/resource-overview', Record<never, never>, Record<never, never>>,
+    '/user-console/template/': RouteRecordInfo<'/user-console/template/', '/user-console/template', Record<never, never>, Record<never, never>>,
   }
 }

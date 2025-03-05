@@ -2,13 +2,13 @@
   <div class="space-y-6">
     <div
       role="alert"
-      class="alert alert-error"
+      class="alert alert-warning"
     >
-      This is a No layout
+      This is a auth layout
     </div>
     <PageRouteData class="mx-auto max-w-screen-lg" />
     <main>
-      <router-view />
+      <slot />
     </main>
   </div>
 </template>

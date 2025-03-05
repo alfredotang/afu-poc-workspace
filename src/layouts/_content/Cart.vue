@@ -8,7 +8,7 @@
   <Header />
   <CartHeader />
   <MainLayout>
-    <router-view />
+    <slot />
   </MainLayout>
 </template>
 <script setup lang="ts">

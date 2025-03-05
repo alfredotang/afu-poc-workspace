@@ -2,7 +2,6 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import VueRouter from 'unplugin-vue-router/vite'
-import Layouts from 'vite-plugin-vue-layouts'
 import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
@@ -32,14 +31,12 @@ export default defineConfig(({ mode }) => ({
       //     .replace(/\((\w+)\)/, '$1')
       // },
       // beforeWriteFiles: root => {
-      //   console.log('root', root)
+      //   console.log({ parent: root.parent })
+      //   root.insert(
+      //     '/root',
+      //     fileURLToPath(new URL('./src/components/Root.vue', import.meta.url))
+      //   )
       // },
-    }),
-    Layouts({
-      layoutsDirs: ['src/layouts'],
-      pagesDirs: ['src/pages'],
-      // extensions: ['layout.vue'],
-      exclude: ['**/_content/**'],
     }),
     vue(),
     vueDevTools(),

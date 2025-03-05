@@ -7,7 +7,7 @@
   </div>
   <Header />
   <MainLayout>
-    <router-view />
+    <slot />
   </MainLayout>
 </template>
 

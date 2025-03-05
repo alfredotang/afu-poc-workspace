@@ -24,9 +24,10 @@ import { cn } from '@/libs/class-name'
 
 const routes: Array<{ label: string; name: RouteRecordName }> = [
   { name: 'my-homie', label: 'home' },
+  { name: '/user-console/resource-overview/', label: 'Resource Overview' },
   { name: '/admin/', label: 'admin' },
   { name: '/about/', label: 'about' },
-  { name: '/cart/', label: 'cart' },
+  { name: '/cart', label: 'cart' },
   { name: '/callback/', label: 'callback' },
 ]
 </script>

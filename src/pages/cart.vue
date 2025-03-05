@@ -3,7 +3,7 @@
 <script lang="ts" setup>
 definePage({
   meta: {
-    layout: 'cart',
+    layout: ['default', 'cart'],
   },
 })
 </script>

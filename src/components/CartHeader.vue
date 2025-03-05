@@ -25,7 +25,6 @@ const routes: Array<{
   name: RouteRecordName
   query?: LocationQueryRaw
 }> = [
-  { name: '/cart/', label: 'Cart' },
   {
     name: '/cart/success',
     label: 'Success',

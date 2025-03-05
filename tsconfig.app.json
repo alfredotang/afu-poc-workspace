@@ -16,7 +16,7 @@
       "typed-router": ["./typed-router.d.ts"],
       "~/*": ["./*"]
     },
-    "types": ["unplugin-vue-router/client", "vite-plugin-vue-layouts/client"]
+    "types": ["unplugin-vue-router/client"]
   },
   "include": [
     "src/**/*.ts",

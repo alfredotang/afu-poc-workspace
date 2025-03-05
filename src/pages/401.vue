@@ -31,7 +31,7 @@
 <script lang="ts" setup>
 definePage({
   meta: {
-    layout: 'no-layout',
+    layout: 'empty',
   },
 })
 </script>

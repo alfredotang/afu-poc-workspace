@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-const TABS = ['Route Config', 'Page Content'] as const
+const TABS = ['Page Content', 'Route Config'] as const
 type Tab = (typeof TABS)[number]
 </script>
 
@@ -44,13 +44,13 @@ const props = defineProps<{
 
 const route = useRoute()
 
-const currentTab = ref<Tab>('Route Config')
+const currentTab = ref<Tab>('Page Content')
 
 const routeName = computed(() => route.name)
 
 watch(routeName, (current, previous) => {
   if (current !== previous) {
-    currentTab.value = 'Route Config'
+    currentTab.value = 'Page Content'
   }
 })
 </script>
