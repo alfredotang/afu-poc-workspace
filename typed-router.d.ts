@@ -23,7 +23,6 @@ declare module 'vue-router/auto-routes' {
     '/about/': RouteRecordInfo<'/about/', '/about', Record<never, never>, Record<never, never>>,
     '/about/[id]/': RouteRecordInfo<'/about/[id]/', '/about/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     '/admin/': RouteRecordInfo<'/admin/', '/admin', Record<never, never>, Record<never, never>>,
-    '/auth/': RouteRecordInfo<'/auth/', '/auth', Record<never, never>, Record<never, never>>,
     '/auth/signin': RouteRecordInfo<'/auth/signin', '/auth/signin', Record<never, never>, Record<never, never>>,
     '/callback/': RouteRecordInfo<'/callback/', '/callback', Record<never, never>, Record<never, never>>,
     '/callback/[time]': RouteRecordInfo<'/callback/[time]', '/callback/:time', { time: ParamValue<true> }, { time: ParamValue<false> }>,
