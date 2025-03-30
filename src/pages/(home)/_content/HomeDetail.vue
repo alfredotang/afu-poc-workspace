@@ -8,7 +8,7 @@
         role="tab"
         class="tab"
         v-for="tab in TABS"
-        :to="{ name: 'my-homie', query: { tab: tab.toLowerCase() } }"
+        :to="{ name: '/(home)/', query: { tab: tab.toLowerCase() } }"
         :key="tab"
         :class="cn('tab', { 'tab-active': currentTab === tab.toLowerCase() })"
         v-text="tab"
@@ -34,7 +34,7 @@ import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { cn } from '@/libs/class-name'
 
-const route = useRoute('my-homie')
+const route = useRoute('/(home)/')
 
 const currentTab = computed(() => {
   const tab = route.query.tab

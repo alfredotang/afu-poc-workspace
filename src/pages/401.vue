@@ -5,7 +5,7 @@
     <div class="chat chat-start">
       <div class="chat-image avatar">
         <div>
-          <router-link :to="{ name: 'my-homie' }">
+          <router-link :to="{ name: '/(home)/' }">
             <img
               src="https://pansci.asia/wp-content/uploads/2016/11/f4ba5977f2f0519a10c9f9bd66cefc89-560x576.png"
               alt="pokemon"
@@ -19,12 +19,6 @@
         <p>Click me to go back to home!</p>
       </div>
     </div>
-    <!-- <router-link :to="{ name: 'my-homie' }">
-      <img
-        src="https://pansci.asia/wp-content/uploads/2016/11/f4ba5977f2f0519a10c9f9bd66cefc89-560x576.png"
-        alt="pokemon"
-      />
-    </router-link> -->
   </main>
 </template>
 

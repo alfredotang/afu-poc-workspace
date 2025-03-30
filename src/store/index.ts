@@ -33,7 +33,7 @@ export const useStore = defineStore('main', () => {
     isOwner.value = payload.role === 'owner'
     userName.value = payload.name
     isLoggedIn.value = true
-    router.push({ name: 'my-homie' })
+    router.push({ name: '/(home)/' })
   }
 
   const logout = () => {
