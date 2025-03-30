@@ -1,0 +1,15 @@
+{
+  "name": "@apps/demo",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/demo",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "type-check": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "cd apps/demo && vue-tsc --build --force"
+      }
+    }
+  }
+}

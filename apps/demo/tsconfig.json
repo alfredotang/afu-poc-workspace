@@ -1,0 +1,35 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "types": [
+      "vite/client",
+      "unplugin-vue-router/client"
+    ],
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "tsBuildInfoFile": "dist/tsconfig.app.tsbuildinfo",
+    "noEmit": true
+  },
+  "include": [
+    "**/*.ts",
+    "src/**/*.vue",
+    "typed-router.d.ts"
+  ],
+  "exclude": [
+    "out-tsc",
+    "dist",
+    "**/*.spec.ts",
+    "**/*.test.ts",
+    "**/*.spec.vue",
+    "**/*.test.vue",
+    "vite.config.ts",
+    "vitest.config.ts",
+    "**/*.test.tsx",
+    "**/*.spec.tsx",
+    "**/*.test.jsx",
+    "**/*.spec.jsx",
+    "eslint.config.js"
+  ]
+}

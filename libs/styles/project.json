@@ -1,0 +1,15 @@
+{
+  "name": "@libs/styles",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/styles/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "type-check": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc -p libs/styles/tsconfig.lib.json --noEmit"
+      }
+    }
+  }
+}

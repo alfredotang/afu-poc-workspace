@@ -1,0 +1,15 @@
+{
+  "name": "@libs/helpers",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/helpers/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "type-check": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc -p libs/helpers/tsconfig.lib.json --noEmit"
+      }
+    }
+  }
+}
