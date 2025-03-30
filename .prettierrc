@@ -15,5 +15,6 @@
         "singleAttributePerLine": true
       }
     }
-  ]
+  ],
+  "plugins": ["prettier-plugin-tailwindcss"]
 }
