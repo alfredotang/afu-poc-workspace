@@ -7,7 +7,6 @@ import { useRoute } from 'vue-router'
 
 definePage({
   meta: {
-    layout: ['default', 'userConsole'],
     hideSidebar: true,
   },
 })

@@ -12,10 +12,4 @@
   </div>
 </template>
 
-<script setup lang="ts">
-definePage({
-  meta: {
-    layout: ['default', 'userConsole'],
-  },
-})
-</script>
+<script setup lang="ts"></script>

@@ -12,10 +12,19 @@ import NestedLayout, { type LayoutType } from './_content/NestedLayout.vue'
 const route = useRoute()
 
 const layouts = computed<LayoutType[]>(() => {
-  if (Array.isArray(route.meta.layout)) {
-    return route.meta.layout?.length ? route.meta.layout : ['default']
-  }
+  const layouts = route.meta.layouts
 
-  return [route.meta.layout || 'default']
+  if (!layouts?.length) {
+    if (route.name?.startsWith('/cart')) {
+      return ['default', 'cart']
+    }
+
+    if (route.name?.startsWith('/user-console')) {
+      return ['default', 'userConsole']
+    }
+
+    return ['default']
+  }
+  return layouts
 })
 </script>

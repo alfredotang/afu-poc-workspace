@@ -1,18 +1,16 @@
 <template>
   <div
     role="alert"
-    class="alert alert-success"
+    class="alert alert-success mb-4"
   >
     This is a cart layout
   </div>
-  <Header />
   <CartHeader />
-  <MainLayout>
+
+  <main class="p-6 max-w-screen-lg mx-auto">
     <slot />
-  </MainLayout>
+  </main>
 </template>
 <script setup lang="ts">
-import Header from '@/components/Header.vue'
 import CartHeader from '@/components/CartHeader.vue'
-import MainLayout from '@/components/MainLayout.vue'
 </script>

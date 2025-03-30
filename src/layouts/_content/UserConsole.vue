@@ -10,7 +10,7 @@
       class="border-r border-gray-200 p-6 min-h-screen"
       v-if="!hideSidebar"
     >
-      <ul class="flex flex-col gap-4 fixed">
+      <ul class="flex flex-col gap-4">
         <router-link
           v-for="item in sidebarItems"
           :key="item.name"
@@ -28,7 +28,7 @@
         <div class="breadcrumbs text-sm">
           <ul>
             <li>
-              <router-link :to="{ name: 'my-homie' }">Home</router-link>
+              <router-link :to="{ name: '/(home)/' }">Home</router-link>
             </li>
             <li v-if="currentRoute">
               <router-link :to="{ name: currentRoute.name }">

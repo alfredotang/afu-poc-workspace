@@ -12,6 +12,5 @@ definePage({
     title: 'Hello world',
     isPublic: true,
   },
-  name: 'my-homie',
 })
 </script>

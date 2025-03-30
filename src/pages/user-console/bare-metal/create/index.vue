@@ -4,7 +4,6 @@
 <script setup lang="ts">
 definePage({
   meta: {
-    layout: ['default', 'userConsole'],
     hideSidebar: true,
   },
 })

@@ -29,7 +29,7 @@ import { computed } from 'vue'
 
 definePage({
   meta: {
-    layout: 'auth',
+    layouts: ['auth'],
     isPublic: true,
   },
 })

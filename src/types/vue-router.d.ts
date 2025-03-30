@@ -19,6 +19,6 @@ declare module 'vue-router' {
     hideGlobalFooter?: boolean
     customBreadcrumb?: Array<Record<string, unknown>>
     disableHeaderSpace?: boolean
-    layout?: LayoutType | LayoutType[]
+    layouts?: LayoutType[]
   }
 }
