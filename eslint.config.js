@@ -6,7 +6,6 @@ import tsParser from '@typescript-eslint/parser'
 import importPlugin from 'eslint-plugin-import'
 import perfectionist from 'eslint-plugin-perfectionist'
 import prettierPlugin from 'eslint-plugin-prettier/recommended'
-import tailwind from 'eslint-plugin-tailwindcss'
 import eslintPluginUnicorn from 'eslint-plugin-unicorn'
 import pluginVue from 'eslint-plugin-vue'
 import globals from 'globals'
@@ -20,7 +19,6 @@ export default [
   eslint.configs.recommended,
   importPlugin.flatConfigs.recommended,
   ...tseslint.configs.recommended,
-  ...tailwind.configs['flat/recommended'],
   ...pluginVue.configs['flat/recommended'],
   {
     ignores: [
@@ -85,7 +83,6 @@ export default [
       parser: tsParser,
     },
     settings: {
-      tailwindcss: { callees: ['cva', 'clsx', 'cn', 'cx'] },
       'import/ignore': ['node_modules'],
     },
     rules: {
@@ -103,8 +100,6 @@ export default [
           destructuredArrayIgnorePattern: '^_',
         },
       ],
-      'tailwindcss/no-custom-classname': 'off',
-      'tailwindcss/no-contradicting-classname': 'warn',
       '@typescript-eslint/no-explicit-any': 'warn',
       'import/no-unresolved': 'off',
       'perfectionist/sort-imports': [

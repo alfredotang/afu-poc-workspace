@@ -1,6 +1,5 @@
 import type { Config } from 'tailwindcss'
 
-import daisyui from 'daisyui'
 import plugin from 'tailwindcss/plugin'
 
 import * as colors from './color'
@@ -88,8 +87,5 @@ export default {
       },
     },
   },
-  daisyui: {
-    themes: ['winter'],
-  },
-  plugins: [daisyui, rootStylePlugin, customClassesPlugin, scrollbarPlugin],
+  plugins: [rootStylePlugin, customClassesPlugin, scrollbarPlugin],
 } satisfies Omit<Config, 'content'>
