@@ -24,9 +24,9 @@ src/pages
 │   ├── [time].vue -> /callback/[time]
 │   └── index.vue  -> /callback
 ├── cart
+│   ├── index.vue   -> /cart
 │   ├── failed.vue  -> /cart/failed
 │   └── success.vue -> /cart/success
-├── cart.vue  -> /cart
 └── user-console
     ├── bare-metal
     │   ├── [id].vue      -> /user-console/bare-metal/[id]
@@ -66,7 +66,7 @@ Resulting URLs:
     meta: {
       title: 'Hello world',
       isPublic: true,
-      layout: 'default', // ['default'] or nested layout ['default', 'auth']
+      layouts: ['default'], // ['default'] or nested layout ['default', 'auth']
     },
     name: 'my-homie', // overrides the route name by auto generated 
     redirect: to => { 
@@ -85,7 +85,7 @@ All layouts are in `src/layouts/_content/`
 <script setup lang="ts">
   definePage({
     meta: {
-      layout: ['default', 'auth'] // or 'default' or undefined
+      layouts: ['default', 'auth'] // or 'default' or undefined
     },
   })
 </script>
@@ -101,7 +101,7 @@ Resulting:
 ```
 > Note: By default, the `DefaultLayout` is used.
 >  
-> Note: Because layout is defined in `definePage`, it is not supported **hot reloading** in development mode, you need to restart the dev server to see the changes.
+> Note: Because layouts is defined in `definePage`, it is not supported **hot reloading** in development mode, you need to restart the dev server to see the changes.
 
 # Troubleshooting
 ```
