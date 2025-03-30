@@ -7,15 +7,15 @@
   </div>
   <div :class="cn(hideSidebar ? '' : 'grid grid-cols-[300px,auto]')">
     <aside
-      class="border-r border-gray-200 p-6 min-h-screen"
       v-if="!hideSidebar"
+      class="min-h-screen border-r border-gray-200 p-6"
     >
       <ul class="flex flex-col gap-4">
         <router-link
           v-for="item in sidebarItems"
           :key="item.name"
-          :to="{ name: item.name }"
           v-slot="{ isActive }"
+          :to="{ name: item.name }"
         >
           <button :class="cn('btn', isActive ? 'btn-primary' : 'btn-ghost')">
             {{ item.label }}
@@ -43,10 +43,11 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { cn } from '@libs/helpers/className'
 import { computed } from 'vue'
 import type { RouteRecordName } from 'vue-router'
 import { useRoute } from 'vue-router'
+
+import { cn } from '@libs/helpers/className'
 
 const sidebarItems: Array<{ label: string; name: RouteRecordName }> = [
   { name: '/user-console/resource-overview/', label: 'Resource Overview' },

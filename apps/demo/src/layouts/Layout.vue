@@ -7,6 +7,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+
 import NestedLayout, { type LayoutType } from './_content/NestedLayout.vue'
 
 const route = useRoute()

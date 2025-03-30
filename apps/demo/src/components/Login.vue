@@ -8,8 +8,8 @@
       @click="toggleLogin"
     >
       <img
-        class="size-10"
         v-show="isLoggedIn"
+        class="size-10"
         src="https://pansci.asia/wp-content/uploads/2016/11/f4ba5977f2f0519a10c9f9bd66cefc89-560x576.png"
         alt="pokemon"
       />
@@ -18,9 +18,10 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
+
 import { useStoreRefs, useStore } from '@apps/demo/store'
 import { cn } from '@libs/helpers/className'
-import { useRouter } from 'vue-router'
 
 const { isLoggedIn, userName } = useStoreRefs()
 const { logout } = useStore()

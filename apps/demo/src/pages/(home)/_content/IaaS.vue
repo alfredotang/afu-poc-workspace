@@ -1,5 +1,5 @@
 <template>
-  <section class="flex flex-col gap-4 justify-center mb-12">
+  <section class="mb-12 flex flex-col justify-center gap-4">
     <div class="mockup-phone">
       <div class="camera"></div>
       <div class="display">

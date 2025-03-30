@@ -1,12 +1,12 @@
 <template>
-  <header class="p-6 flex justify-between">
+  <header class="flex justify-between p-6">
     <nav class="flex gap-4">
       <router-link
         v-for="route in routes"
-        class="hover:underline"
         :key="route.name"
-        :to="{ name: route.name }"
         v-slot="{ isActive }"
+        class="hover:underline"
+        :to="{ name: route.name }"
       >
         <button :class="cn('btn', isActive ? 'btn-primary' : 'btn-ghost')">
           {{ route.label }}
@@ -19,6 +19,7 @@
 
 <script setup lang="ts">
 import type { RouteRecordName } from 'vue-router'
+
 import Login from '@apps/demo/components/Login.vue'
 import { cn } from '@libs/helpers/className'
 

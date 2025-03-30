@@ -1,9 +1,11 @@
 import { defineStore, storeToRefs } from 'pinia'
 import { ref } from 'vue'
-import { jwtDecode, type JwtPayload } from 'jwt-decode'
-import cookie from '@libs/helpers/cookie'
-import { ACCESS_TOKEN_DICT } from './constants'
 import { useRouter } from 'vue-router'
+
+import cookie from '@libs/helpers/cookie'
+import { jwtDecode, type JwtPayload } from 'jwt-decode'
+
+import { ACCESS_TOKEN_DICT } from './constants'
 
 const ACCESS_TOKEN_KEY = 'at'
 

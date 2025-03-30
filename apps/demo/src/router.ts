@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from 'vue-router/auto-routes'
+
 import { useStoreRefs } from '@apps/demo/store'
 
 console.log({ routes })

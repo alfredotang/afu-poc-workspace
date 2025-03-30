@@ -1,11 +1,11 @@
 <template>
-  <nav class="px-6 mb-6 flex gap-4">
+  <nav class="mb-6 flex gap-4 px-6">
     <router-link
       v-for="route in routes"
-      class="hover:underline"
       :key="route.name"
-      :to="{ name: route.name, query: route.query }"
       v-slot="{ isActive }"
+      class="hover:underline"
+      :to="{ name: route.name, query: route.query }"
     >
       <button :class="cn('btn', isActive ? 'btn-success' : 'btn-ghost')">
         {{ route.label }}
@@ -16,9 +16,10 @@
 
 <script lang="ts" setup>
 import type { RouteRecordName, LocationQueryRaw } from 'vue-router'
+
 import { cn } from '@libs/helpers/className'
-import dayjs from 'dayjs'
 import { uuid } from '@libs/helpers/id'
+import dayjs from 'dayjs'
 
 const routes: Array<{
   label: string

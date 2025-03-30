@@ -7,7 +7,7 @@
   </div>
   <CartHeader />
 
-  <main class="p-6 max-w-screen-lg mx-auto">
+  <main class="mx-auto max-w-screen-lg p-6">
     <slot />
   </main>
 </template>

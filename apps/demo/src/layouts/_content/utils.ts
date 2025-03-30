@@ -1,5 +1,6 @@
-import type { LayoutType } from './NestedLayout.vue'
 import camelCase from 'lodash/fp/camelCase'
+
+import type { LayoutType } from './NestedLayout.vue'
 
 const LAYOUT_LIST: LayoutType[] = [
   'default',

@@ -1,4 +1,4 @@
-<template></template>
+<template>Not Found</template>
 <script setup lang="ts">
 definePage({
   redirect: {

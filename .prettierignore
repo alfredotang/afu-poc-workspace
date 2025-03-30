@@ -1,3 +1,6 @@
 node_modules
-dist
-coverage
+**/dist/**
+**/coverage/**
+data/country.json
+/.nx/cache
+/.nx/workspace-data

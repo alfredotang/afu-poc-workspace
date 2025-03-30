@@ -6,8 +6,9 @@
 </template>
 
 <script setup lang="ts">
-import dayjs from 'dayjs'
 import { useRoute } from 'vue-router'
+
+import dayjs from 'dayjs'
 
 const route = useRoute('/callback/[time]')
 

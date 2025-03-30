@@ -1,9 +1,9 @@
 <template>
   <main
-    class="p-6 mx-auto max-w-screen-lg text-3xl flex flex-col items-center justify-center relative"
+    class="relative mx-auto flex max-w-screen-lg flex-col items-center justify-center p-6 text-3xl"
   >
     <div class="chat chat-start">
-      <div class="chat-image avatar">
+      <div class="avatar chat-image">
         <div>
           <router-link :to="{ name: '/(home)/' }">
             <img

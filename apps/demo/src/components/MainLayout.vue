@@ -1,14 +1,14 @@
 <template>
-  <section class="mb-12 max-w-sm mx-auto">
+  <section class="mx-auto mb-12 max-w-sm">
     <div
       role="tablist"
-      class="tabs tabs-boxed"
+      class="tabs-boxed tabs"
     >
       <a
-        role="tab"
-        class="tab"
         v-for="item in TABS"
         :key="item"
+        role="tab"
+        class="tab"
         :class="cn('tab', { 'tab-active': item === currentTab })"
         @click="currentTab = item"
         v-text="item"
@@ -17,11 +17,11 @@
   </section>
   <PageRouteData
     v-if="currentTab === 'Route Config'"
-    class="mb-6 p-6 max-w-screen-lg mx-auto"
+    class="mx-auto mb-6 max-w-screen-lg p-6"
   />
   <main
     v-else
-    :class="cn('p-6 max-w-screen-lg mx-auto', props.class)"
+    :class="cn('mx-auto max-w-screen-lg p-6', props.class)"
   >
     <slot />
   </main>
@@ -34,9 +34,10 @@ type Tab = (typeof TABS)[number]
 
 <script lang="ts" setup>
 import { computed, type HTMLAttributes, ref, watch } from 'vue'
-import { cn } from '@libs/helpers/className'
-import PageRouteData from '@apps/demo/components/PageRouteData.vue'
 import { useRoute } from 'vue-router'
+
+import PageRouteData from '@apps/demo/components/PageRouteData.vue'
+import { cn } from '@libs/helpers/className'
 
 const props = defineProps<{
   class?: HTMLAttributes['class']

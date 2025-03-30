@@ -1,25 +1,26 @@
 <template>
-  <section class="mb-12 max-w-sm mx-auto">
+  <section class="mx-auto mb-12 max-w-sm">
     <div
       role="tablist"
-      class="tabs tabs-boxed"
+      class="tabs-boxed tabs"
     >
       <router-link
+        v-for="tab in TABS"
+        :key="tab"
         role="tab"
         class="tab"
-        v-for="tab in TABS"
         :to="{ name: '/(home)/', query: { tab: tab.toLowerCase() } }"
-        :key="tab"
         :class="cn('tab', { 'tab-active': currentTab === tab.toLowerCase() })"
-        v-text="tab"
-      />
+      >
+        {{ tab }}
+      </router-link>
     </div>
   </section>
   <component :is="components[currentTab]" />
 </template>
 
 <script lang="ts">
-import { defineAsyncComponent } from 'vue'
+import { defineAsyncComponent, computed } from 'vue'
 
 const TABS = ['IaaS', 'MaaS'] as const
 
@@ -30,8 +31,8 @@ const components = {
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+
 import { cn } from '@libs/helpers/className'
 
 const route = useRoute('/(home)/')

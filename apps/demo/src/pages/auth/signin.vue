@@ -1,6 +1,6 @@
 <template>
   <div
-    class="max-w-screen-lg mx-auto flex justify-center items-center flex-col"
+    class="mx-auto flex max-w-screen-lg flex-col items-center justify-center"
   >
     <select
       class="select select-bordered w-full max-w-xs"
@@ -14,18 +14,19 @@
       </option>
       <option
         v-for="item in options"
+        :key="item"
         :value="item"
         v-text="item"
-        :key="item"
       />
     </select>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue'
+
 import { useStore } from '@apps/demo/store'
 import { ACCESS_TOKEN_DICT } from '@apps/demo/store/constants'
-import { computed } from 'vue'
 
 definePage({
   meta: {

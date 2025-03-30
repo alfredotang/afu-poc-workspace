@@ -9,10 +9,10 @@
         />
 
         <pre
-          :data-prefix="index + 1"
           v-for="([key, value], index) in metaStruct"
           :key="key"
-          class="whitespace-nowrap grid grid-cols-[calc(2rem+2ch)_200px_auto]"
+          :data-prefix="index + 1"
+          class="grid grid-cols-[calc(2rem+2ch)_200px_auto] whitespace-nowrap"
         >
           <code class="text-success" v-text="key"/>         
           <code class="text-warning" v-text="mapRouteConfigValueDisplay(value)" />
@@ -48,10 +48,10 @@
         />
 
         <pre
-          :data-prefix="index + 1"
           v-for="([key, value], index) in paramsStruct"
           :key="key"
-          class="whitespace-nowrap grid grid-cols-[calc(2rem+2ch)_100px_auto]"
+          :data-prefix="index + 1"
+          class="grid grid-cols-[calc(2rem+2ch)_100px_auto] whitespace-nowrap"
         >
           <code class="text-success" v-text="key"/>         
           <code class="text-warning" v-text="mapRouteConfigValueDisplay(value)" />
@@ -65,10 +65,10 @@
         />
 
         <pre
-          :data-prefix="index + 1"
           v-for="([key, value], index) in queryStruct"
           :key="key"
-          class="whitespace-nowrap grid grid-cols-[calc(2rem+2ch)_100px_auto]"
+          :data-prefix="index + 1"
+          class="grid grid-cols-[calc(2rem+2ch)_100px_auto] whitespace-nowrap"
         >
           <code class="text-success" v-text="key"/>         
           <code class="text-warning" v-text="mapRouteConfigValueDisplay(value)" />
@@ -80,8 +80,9 @@
 
 <script setup lang="ts">
 import { type HTMLAttributes, computed } from 'vue'
-import { cn } from '@libs/helpers/className'
 import { useRoute } from 'vue-router'
+
+import { cn } from '@libs/helpers/className'
 
 const props = defineProps<{
   class?: HTMLAttributes['class']
