@@ -1,11 +1,12 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "types": ["vite/client", "unplugin-vue-router/client"],
+    "types": ["vite/client"],
     "jsx": "react-jsx",
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "noEmit": true
+    "noEmit": true,
+    "strictNullChecks": true
   },
   "include": ["**/*.ts", "src/**/*.vue", "../../libs/@types/src/*.d.ts"],
   "exclude": [
@@ -13,16 +14,11 @@
     "dist",
     "**/*.spec.ts",
     "**/*.test.ts",
-    "**/*.spec.vue",
-    "**/*.test.vue",
     "vite.config.ts",
     "vitest.config.ts",
     "**/*.test.tsx",
     "**/*.spec.tsx",
-    "**/*.test.jsx",
-    "**/*.spec.jsx",
     "eslint.config.js",
-    "tailwind.config.ts",
-    "../demo-react/*"
+    "tailwind.config.ts"
   ]
 }

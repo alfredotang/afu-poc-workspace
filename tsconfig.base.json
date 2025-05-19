@@ -19,8 +19,10 @@
     "types": ["node", "vite/client"],
     "paths": {
       "@apps/demo/*": ["apps/demo/src/*"],
+      "@apps/demo-react/*": ["apps/demo-react/src/*"],
       "@libs/helpers/*": ["libs/helpers/src/*"],
-      "@libs/styles/*": ["libs/styles/src/*"]
+      "@libs/styles/*": ["libs/styles/src/*"],
+      "@libs/hooks/*": ["libs/hooks/src/*"]
     }
   },
   "exclude": ["node_modules", "tmp", "**/dist/**"]

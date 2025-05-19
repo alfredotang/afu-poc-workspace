@@ -36,7 +36,7 @@
         />
         <pre
           data-prefix=">"
-          class="whitespace-nowrap text-success"
+          class="text-success whitespace-nowrap"
           v-text="route.path"
         />
       </div>

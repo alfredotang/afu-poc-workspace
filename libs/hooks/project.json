@@ -1,14 +1,14 @@
 {
-  "name": "@apps/demo",
+  "name": "@libs/hooks",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/demo",
-  "projectType": "application",
+  "sourceRoot": "libs/hooks/src",
+  "projectType": "library",
   "tags": [],
   "targets": {
     "type-check": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "vue-tsc -p ./apps/demo/tsconfig.app.json --noEmit"
+        "command": "tsc -p libs/hooks/tsconfig.lib.json --noEmit"
       }
     }
   }

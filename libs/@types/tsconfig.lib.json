@@ -1,13 +1,12 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "types": ["vite/client", "unplugin-vue-router/client"],
-    "jsx": "react-jsx",
+    "lib": ["esnext", "dom"],
     "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "noEmit": true
+    "noEmit": true,
+    "types": ["node"]
   },
-  "include": ["**/*.ts", "src/**/*.vue", "../../libs/@types/src/*.d.ts"],
+  "include": ["src/**/*.d.ts"],
   "exclude": [
     "out-tsc",
     "dist",
@@ -21,8 +20,6 @@
     "**/*.spec.tsx",
     "**/*.test.jsx",
     "**/*.spec.jsx",
-    "eslint.config.js",
-    "tailwind.config.ts",
-    "../demo-react/*"
+    "eslint.config.js"
   ]
 }

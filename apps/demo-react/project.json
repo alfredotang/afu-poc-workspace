@@ -1,14 +1,14 @@
 {
-  "name": "@apps/demo",
+  "name": "@apps/demo-react",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/demo",
+  "sourceRoot": "apps/demo-react",
   "projectType": "application",
   "tags": [],
   "targets": {
     "type-check": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "vue-tsc -p ./apps/demo/tsconfig.app.json --noEmit"
+        "command": "cd apps/demo-react && tsc --noEmit"
       }
     }
   }

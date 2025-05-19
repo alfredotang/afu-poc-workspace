@@ -1,5 +1,11 @@
 <template>
-  <router-link :to="{ name: '/about/[id]/', params: { id: 1 } }">
-    <button class="btn btn-primary">about/1</button>
-  </router-link>
+  <noscript></noscript>
 </template>
+
+<script setup lang="ts">
+definePage({
+  meta: {
+    layouts: ['empty'],
+  },
+})
+</script>

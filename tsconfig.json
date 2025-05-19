@@ -11,6 +11,12 @@
     },
     {
       "path": "./libs/helpers/"
+    },
+    {
+      "path": "./apps/demo-react/"
+    },
+    {
+      "path": "./libs/hooks/"
     }
   ]
 }

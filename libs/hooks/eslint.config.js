@@ -1,7 +1,7 @@
 import baseConfig from '../../eslint.config.js'
 
+/** @type {import('eslint').Linter.Config[]} */
 export default [
-  ...baseConfig,
   ...baseConfig,
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx', '**/*.vue'],
@@ -10,13 +10,7 @@ export default [
         'error',
         {
           enforceBuildableLibDependency: true,
-          allow: [
-            '^.*/eslint(\\.base)?\\.config\\.[cm]?js$',
-            '^.*/tailwind\\.base',
-            '^@libs',
-            '^@apps/demo',
-            '^@apps/demo-react',
-          ],
+          allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?js$', '^@libs'],
           depConstraints: [
             {
               sourceTag: '*',

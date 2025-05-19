@@ -16,8 +16,7 @@ export default {
   presets: [baseConfig],
   content: [
     join(__dirname, 'index.html'),
-    join(__dirname, 'src/**/*!(*.stories|*.spec).{vue,ts,tsx,js,jsx,css}'),
-    join(__dirname, '../demo-react/src/**/*!(*.stories|*.spec).{ts,tsx,css}'),
+    join(__dirname, 'src/**/*!(*.stories|*.spec).{ts,tsx,css}'),
     ...createGlobPatternsForDependencies(__dirname),
   ],
   plugins: [],

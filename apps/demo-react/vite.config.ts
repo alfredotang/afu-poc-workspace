@@ -4,70 +4,28 @@ import { fileURLToPath } from 'node:url'
 import react from '@vitejs/plugin-react'
 import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
-import vueDevTools from 'vite-plugin-vue-devtools'
-import svgLoader from 'vite-svg-loader'
 import { configDefaults } from 'vitest/config'
 
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin'
 import tailwindcss from '@tailwindcss/vite'
 import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
-// import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
-import VueRouter from 'unplugin-vue-router/vite'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // https://vite.dev/config/
-export default defineConfig(({ mode }) => {
+export default defineConfig(() => {
   return {
     root: __dirname,
     cacheDir: '../../node_modules/.vite/packages/main',
     plugins: [
-      VueRouter({
-        routesFolder: [
-          {
-            src: 'src/pages',
-          },
-        ],
-        logs: false,
-        exclude: ['**/_content/**'],
-        extensions: ['.vue'],
-      }),
       vue(),
-      mode === 'development' && vueDevTools(),
-      svgLoader({
-        svgoConfig: {
-          multipass: true,
-          plugins: [
-            {
-              name: 'preset-default',
-              params: {
-                overrides: {
-                  // @see https://github.com/svg/svgo/issues/1128
-                  removeViewBox: false,
-                },
-              },
-            },
-          ],
-        },
-      }),
       nxViteTsPaths(),
-      // TanStackRouterVite({
-      //   target: 'react',
-      //   autoCodeSplitting: true,
-      //   routesDirectory: 'src/pages',
-      //   routeFileIgnorePrefix: '_content',
-      //   quoteStyle: 'single',
-      //   generatedRouteTree: './src/libs/router/route-tree.gen.ts',
-      // }),
       TanStackRouterVite({
         target: 'react',
         autoCodeSplitting: true,
-        routesDirectory: path.resolve(__dirname, '../demo-react/src/pages'),
+        routesDirectory: 'src/pages',
         routeFileIgnorePrefix: '_content',
         quoteStyle: 'single',
-        generatedRouteTree: path.resolve(
-          __dirname,
-          '../demo-react/src/router/route-tree.gen.ts'
-        ),
+        generatedRouteTree: './src/router/route-tree.gen.ts',
       }),
       react(),
       tailwindcss(),
