@@ -5,7 +5,8 @@
     "jsx": "react-jsx",
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "noEmit": true
+    "noEmit": true,
+    "strictNullChecks": true
   },
   "include": ["**/*.ts", "src/**/*.vue", "../../libs/@types/src/*.d.ts"],
   "exclude": [
@@ -22,7 +23,6 @@
     "**/*.test.jsx",
     "**/*.spec.jsx",
     "eslint.config.js",
-    "tailwind.config.ts",
-    "../demo-react/*"
+    "tailwind.config.ts"
   ]
 }
