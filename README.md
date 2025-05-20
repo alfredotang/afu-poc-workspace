@@ -1,10 +1,10 @@
-# Alfredo Tang's Vue Practice and POC project
+# Alfredo Tang's POC workspace 
 
 ![bg.jpg](./docs/images/bg.jpg)
 
 ## Table of Contents
 
-- [Alfredo Tang's Vue Practice and POC project](#alfredo-tangs-vue-practice-and-poc-project)
+- [Alfredo Tang's POC workspace](#alfredo-tangs-poc-workspace)
   - [Table of Contents](#table-of-contents)
   - [run project](#run-project)
   - [documents](#documents)
