@@ -1,9 +1,9 @@
 <template>
   <div
     role="alert"
-    class="alert alert-info"
+    class="alert alert-success"
   >
-    This is a default layout
+    This is a Vue layout
   </div>
   <Header />
   <MainLayout>

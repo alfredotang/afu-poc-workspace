@@ -1,11 +1,12 @@
 import qs, { type ParsedQuery } from 'query-string'
 
-class UniversalRouter {
+export const universalRouter = {
   pushVue({ path, query }: { path: string; query?: ParsedQuery }) {
     const route = qs.stringifyUrl({ url: path, query })
-    // @ts-expect-error - for testing
-    window.vueRouter.push({ path: route, query })
-  }
+    if (window.vueRouter) {
+      window.vueRouter.push({ path: route, query })
+    } else {
+      window.location.href = route
+    }
+  },
 }
-
-export const universalRouter = new UniversalRouter()

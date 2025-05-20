@@ -69,7 +69,12 @@ export default defineConfig(({ mode }) => {
           '../demo-react/src/router/route-tree.gen.ts'
         ),
       }),
-      react(),
+      react({
+        include: [
+          path.resolve(__dirname, '../demo-react/src/*'),
+          path.resolve(__dirname, '../../libs/alison-ui/src/*'),
+        ],
+      }),
       tailwindcss(),
     ],
     // resolve: {

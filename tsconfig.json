@@ -16,7 +16,13 @@
       "path": "./apps/demo-react/"
     },
     {
-      "path": "./libs/hooks/"
+      "path": "./libs/alison-ui/"
     }
-  ]
+  ],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs",
+      "moduleResolution": "node10"
+    }
+  }
 }

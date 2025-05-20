@@ -16,7 +16,6 @@ app.use(createPinia())
 app.use(router)
 app.use(VueQueryPlugin, { queryClient })
 
-// @ts-expect-error - for testing
 window.vueRouter = router
 
 app.mount('#app')

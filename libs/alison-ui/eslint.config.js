@@ -14,8 +14,6 @@ export default [
             '^.*/eslint(\\.base)?\\.config\\.[cm]?js$',
             '^.*/tailwind\\.base',
             '^@libs',
-            '^@apps/demo',
-            '^@apps/demo-react',
             '^@alison-ui',
           ],
           depConstraints: [
@@ -26,6 +24,7 @@ export default [
           ],
         },
       ],
+      'vue/multi-word-component-names': 'off',
     },
   },
 ]

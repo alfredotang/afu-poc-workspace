@@ -1,0 +1,1 @@
+export { universalRouter } from './router'

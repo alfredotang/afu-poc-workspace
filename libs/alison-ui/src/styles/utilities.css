@@ -1,0 +1,95 @@
+@layer base {
+  :root {
+    --font-inter: Inter, sans-serif;
+    --transparent: transparent;
+    --z-1: 1;
+    --z-2: 2;
+    --z-3: 3;
+    --z-4: 4;
+    --z-5: 5;
+    --z-6: 6;
+    --z-7: 7;
+    --z-8: 8;
+    --z-9: 9;
+    --z-header: 101;
+    --z-footer: 102;
+    --z-modal: 103;
+  }
+}
+
+@layer utilities {
+  .scrollbar-stable {
+    scrollbar-gutter: stable;
+  }
+
+  .scrollbar-hide {
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-default {
+    scrollbar-width: auto;
+  }
+  .scrollbar-default::-webkit-scrollbar {
+    display: block;
+  }
+
+  .text-fill-transparent {
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-highlight-primary {
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(
+      349.68deg,
+      #a2ccf8 14.18%,
+      #1780ed 47.37%,
+      #5da6f3 76.79%
+    );
+  }
+
+  .rounded-0\.5xl {
+    border-radius: 0.675rem;
+  }
+
+  .z-1 {
+    z-index: var(--z-1);
+  }
+  .z-2 {
+    z-index: var(--z-2);
+  }
+  .z-3 {
+    z-index: var(--z-3);
+  }
+  .z-4 {
+    z-index: var(--z-4);
+  }
+  .z-5 {
+    z-index: var(--z-5);
+  }
+  .z-6 {
+    z-index: var(--z-6);
+  }
+  .z-7 {
+    z-index: var(--z-7);
+  }
+  .z-8 {
+    z-index: var(--z-8);
+  }
+  .z-9 {
+    z-index: var(--z-9);
+  }
+  .z-header {
+    z-index: var(--z-header);
+  }
+  .z-footer {
+    z-index: var(--z-footer);
+  }
+  .z-modal {
+    z-index: var(--z-modal);
+  }
+}

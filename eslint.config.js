@@ -135,6 +135,8 @@ export default [
             type: {
               node: ['^node:.+'],
               vue: ['^vue$', '^vue-.+', '^pinia$'],
+              react: ['^react$', '^react-dom$', '^@tanstack/react-router$'],
+              alisonUi: ['^@alison-ui/.+'],
               primevue: ['^primevue$', '^primevue/.+', '^@primevue/.+'],
               i18next: ['^i18next$', '^i18next-.+'],
               vite: ['^vite', '^@vite'],
@@ -142,6 +144,8 @@ export default [
             value: {
               node: ['^node:.+'],
               vue: ['^vue$', '^vue-.+', '^pinia$'],
+              react: ['^react$', '^react-dom$', '^@tanstack/react-router$'],
+              alisonUi: ['^@alison-ui/.+'],
               primevue: ['^primevue$', '^primevue/.+', '^@primevue/.+'],
               i18next: ['^i18next$', '^i18next-.+'],
               vite: ['^vite', '^@vite'],

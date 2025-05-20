@@ -1,14 +1,8 @@
 <template>
-  <div
-    role="alert"
-    class="alert alert-info"
-  >
-    This is a user console layout
-  </div>
-  <div :class="cn(hideSidebar ? '' : 'grid grid-cols-[300px,auto]')">
+  <div :class="cn(hideSidebar ? '' : 'grid grid-cols-[300px_auto]')">
     <aside
       v-if="!hideSidebar"
-      class="min-h-screen border-r border-gray-200 p-6"
+      class="border-r border-gray-200 p-6"
     >
       <ul class="flex flex-col gap-4">
         <router-link

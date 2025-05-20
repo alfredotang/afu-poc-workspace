@@ -1,0 +1,15 @@
+{
+  "name": "@alison-ui",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/alison-ui/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "type-check": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "cd libs/alison-ui && tsc --noEmit"
+      }
+    }
+  }
+}

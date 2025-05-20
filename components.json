@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "default",
+  "rsc": true,
+  "tsx": true,
+  "tailwind": {
+    "cssVariables": true,
+    "baseColor": "gray",
+    "prefix": "",
+    "css": "libs/alison-ui/src/styles/alison-ui.css",
+    "config": "libs/alison-ui/src/tailwind.alison-ui.ts"
+  },
+  "iconLibrary": "lucide",
+  "aliases": {
+    "utils": "@libs/helpers/className",
+    "components": "@libs/alison-ui/src/.",
+    "ui": "@alison-ui/.",
+    "lib": "@libs/helpers/.",
+    "hooks": "@libs/hooks/."
+  }
+}

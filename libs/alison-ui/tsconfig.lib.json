@@ -1,14 +1,13 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "types": ["vite/client"],
     "jsx": "react-jsx",
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "noEmit": true,
     "strictNullChecks": true
   },
-  "include": ["**/*.ts", "src/**/*.tsx", "../../libs/@types/src/*.d.ts"],
+  "include": ["**/*.ts", "**/*.tsx", "../../libs/@types/src/*.d.ts"],
   "exclude": [
     "out-tsc",
     "dist",
@@ -19,6 +18,10 @@
     "**/*.test.tsx",
     "**/*.spec.tsx",
     "eslint.config.js",
-    "tailwind.config.ts"
+    "tailwind.config.ts",
+    "**/*.stories.ts",
+    "**/*.stories.js",
+    "**/*.stories.jsx",
+    "**/*.stories.tsx"
   ]
 }

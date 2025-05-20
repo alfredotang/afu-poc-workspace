@@ -1,7 +1,9 @@
-@import 'tailwindcss';
-
-@config '../tailwind.config.ts';
-
+@import 'tailwindcss' source(none);
+@import 'tw-animate-css';
+@import '../../../libs/alison-ui/src/styles/theme.css';
+@source '../src';
+@source '../../demo-react/src';
+@source '../../../libs/alison-ui/src';
 @plugin "daisyui" {
   themes: winter;
 }
@@ -29,7 +31,6 @@ html {
   background: linear-gradient(150deg, #e4eaf6 0%, #cdd6e5 100%);
 
   background-size: cover;
-  min-width: 1280px;
 }
 
 body {

@@ -1,6 +1,7 @@
-@import 'tailwindcss';
-
-@config '../tailwind.config.ts';
+@import 'tailwindcss' source(none);
+@import '../../../libs/alison-ui/src/styles/theme.css';
+@source '../../../libs/alison-ui/src';
+@source '../src';
 
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
@@ -29,7 +30,6 @@ html {
   font-size: 16px;
 
   background-size: cover;
-  min-width: 1280px;
 }
 
 body {

@@ -18,11 +18,12 @@
     "baseUrl": ".",
     "types": ["node", "vite/client"],
     "paths": {
-      "@apps/demo/*": ["apps/demo/src/*"],
+      "@alison-ui/*": ["libs/alison-ui/src/*"],
       "@apps/demo-react/*": ["apps/demo-react/src/*"],
+      "@apps/demo/*": ["apps/demo/src/*"],
       "@libs/helpers/*": ["libs/helpers/src/*"],
-      "@libs/styles/*": ["libs/styles/src/*"],
-      "@libs/hooks/*": ["libs/hooks/src/*"]
+      "@libs/hooks/*": ["libs/hooks/src/*"],
+      "@libs/styles/*": ["libs/styles/src/*"]
     }
   },
   "exclude": ["node_modules", "tmp", "**/dist/**"]

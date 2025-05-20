@@ -4,17 +4,13 @@
       {{ route.meta.title }}
     </div>
     <HomeDetail />
-    <div id="react-content"></div>
   </div>
 </template>
 
 <script setup lang="tsx">
 import { useRoute } from 'vue-router'
 
-import { useRenderReact } from '@apps/demo/composables/useRenderReact'
-
 import HomeDetail from './_content/HomeDetail.vue'
-import ReactContent from './_content/react-content'
 
 definePage({
   meta: {
@@ -22,8 +18,6 @@ definePage({
     isPublic: true,
   },
 })
-
-useRenderReact('react-content', <ReactContent />)
 
 const route = useRoute()
 </script>
