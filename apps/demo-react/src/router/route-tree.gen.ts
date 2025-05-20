@@ -11,13 +11,13 @@
 // Import Routes
 
 import { Route as rootRoute } from './../pages/__root'
-import { Route as AboutImport } from './../pages/about'
+import { Route as AboutRouteImport } from './../pages/about/route'
 import { Route as AboutIndexImport } from './../pages/about/index'
 import { Route as AboutAboutIdImport } from './../pages/about/$aboutId'
 
 // Create/Update Routes
 
-const AboutRoute = AboutImport.update({
+const AboutRouteRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
   getParentRoute: () => rootRoute,
@@ -26,13 +26,13 @@ const AboutRoute = AboutImport.update({
 const AboutIndexRoute = AboutIndexImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => AboutRoute,
+  getParentRoute: () => AboutRouteRoute,
 } as any)
 
 const AboutAboutIdRoute = AboutAboutIdImport.update({
   id: '/$aboutId',
   path: '/$aboutId',
-  getParentRoute: () => AboutRoute,
+  getParentRoute: () => AboutRouteRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -43,7 +43,7 @@ declare module '@tanstack/react-router' {
       id: '/about'
       path: '/about'
       fullPath: '/about'
-      preLoaderRoute: typeof AboutImport
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRoute
     }
     '/about/$aboutId': {
@@ -51,34 +51,36 @@ declare module '@tanstack/react-router' {
       path: '/$aboutId'
       fullPath: '/about/$aboutId'
       preLoaderRoute: typeof AboutAboutIdImport
-      parentRoute: typeof AboutImport
+      parentRoute: typeof AboutRouteImport
     }
     '/about/': {
       id: '/about/'
       path: '/'
       fullPath: '/about/'
       preLoaderRoute: typeof AboutIndexImport
-      parentRoute: typeof AboutImport
+      parentRoute: typeof AboutRouteImport
     }
   }
 }
 
 // Create and export the route tree
 
-interface AboutRouteChildren {
+interface AboutRouteRouteChildren {
   AboutAboutIdRoute: typeof AboutAboutIdRoute
   AboutIndexRoute: typeof AboutIndexRoute
 }
 
-const AboutRouteChildren: AboutRouteChildren = {
+const AboutRouteRouteChildren: AboutRouteRouteChildren = {
   AboutAboutIdRoute: AboutAboutIdRoute,
   AboutIndexRoute: AboutIndexRoute,
 }
 
-const AboutRouteWithChildren = AboutRoute._addFileChildren(AboutRouteChildren)
+const AboutRouteRouteWithChildren = AboutRouteRoute._addFileChildren(
+  AboutRouteRouteChildren,
+)
 
 export interface FileRoutesByFullPath {
-  '/about': typeof AboutRouteWithChildren
+  '/about': typeof AboutRouteRouteWithChildren
   '/about/$aboutId': typeof AboutAboutIdRoute
   '/about/': typeof AboutIndexRoute
 }
@@ -90,7 +92,7 @@ export interface FileRoutesByTo {
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/about': typeof AboutRouteWithChildren
+  '/about': typeof AboutRouteRouteWithChildren
   '/about/$aboutId': typeof AboutAboutIdRoute
   '/about/': typeof AboutIndexRoute
 }
@@ -105,11 +107,11 @@ export interface FileRouteTypes {
 }
 
 export interface RootRouteChildren {
-  AboutRoute: typeof AboutRouteWithChildren
+  AboutRouteRoute: typeof AboutRouteRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  AboutRoute: AboutRouteWithChildren,
+  AboutRouteRoute: AboutRouteRouteWithChildren,
 }
 
 export const routeTree = rootRoute
@@ -126,7 +128,7 @@ export const routeTree = rootRoute
       ]
     },
     "/about": {
-      "filePath": "about.tsx",
+      "filePath": "about/route.tsx",
       "children": [
         "/about/$aboutId",
         "/about/"

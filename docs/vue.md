@@ -1,4 +1,4 @@
-# Folder structure
+# Folder structure vue
 
 1. every `*.vue` in `src/pages` is a route
 2. every `**/_content/**` is ignored to be a route
