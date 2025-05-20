@@ -8,14 +8,18 @@ import queryClient from './query-client'
 import router from './router'
 import './style.css'
 
-import '@apps/demo-react/main'
+const pinia = createPinia()
+const createReactApp = () => {
+  import('@apps/demo-react/main')
+}
 
 const app = createApp(App)
 
-app.use(createPinia())
+app.use(pinia)
 app.use(router)
 app.use(VueQueryPlugin, { queryClient })
 
 window.vueRouter = router
-
+window.pinia = pinia
 app.mount('#app')
+createReactApp()

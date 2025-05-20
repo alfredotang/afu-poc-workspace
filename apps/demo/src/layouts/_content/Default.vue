@@ -1,14 +1,16 @@
 <template>
-  <div
-    role="alert"
-    class="alert alert-success"
-  >
-    This is a Vue layout
+  <div class="flex min-h-screen flex-col">
+    <div
+      role="alert"
+      class="alert alert-success"
+    >
+      This is a Vue layout
+    </div>
+    <Header />
+    <MainLayout class="grow">
+      <slot />
+    </MainLayout>
   </div>
-  <Header />
-  <MainLayout>
-    <slot />
-  </MainLayout>
 </template>
 
 <script setup lang="ts">

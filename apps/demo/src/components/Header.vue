@@ -13,6 +13,12 @@
         </button>
       </router-link>
     </nav>
+    <button
+      class="btn btn-ghost"
+      @click="setFramework(framework === 'react' ? 'vue' : 'react')"
+    >
+      {{ framework }}
+    </button>
     <Login />
   </header>
 </template>
@@ -21,8 +27,14 @@
 import type { RouteRecordName } from 'vue-router'
 
 import Login from '@apps/demo/components/Login.vue'
+import {
+  useFrameworkStore,
+  useFrameworkStoreRefs,
+} from '@apps/demo/store/framework'
 import { cn } from '@libs/helpers/className'
 
+const { setFramework } = useFrameworkStore()
+const { framework } = useFrameworkStoreRefs()
 const routes: Array<{ label: string; name: RouteRecordName }> = [
   { name: '/(home)/', label: 'home' },
   { name: '/user-console/resource-overview/', label: 'Resource Overview' },

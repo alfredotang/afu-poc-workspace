@@ -24,9 +24,9 @@ export default defineConfig(() => {
         target: 'react',
         autoCodeSplitting: true,
         routesDirectory: 'src/pages',
-        routeFileIgnorePrefix: '_content',
         quoteStyle: 'single',
         generatedRouteTree: './src/router/route-tree.gen.ts',
+        routeFileIgnorePrefix: '_content',
       }),
       react(),
       tailwindcss(),
@@ -57,6 +57,7 @@ export default defineConfig(() => {
       fs: {
         allow: ['../..'],
       },
+      port: 9999,
     },
     test: {
       include: ['**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],

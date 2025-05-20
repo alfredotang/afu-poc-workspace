@@ -10,8 +10,6 @@ import { configDefaults } from 'vitest/config'
 
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin'
 import tailwindcss from '@tailwindcss/vite'
-import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
-// import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
 import VueRouter from 'unplugin-vue-router/vite'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -50,25 +48,6 @@ export default defineConfig(({ mode }) => {
         },
       }),
       nxViteTsPaths(),
-      // TanStackRouterVite({
-      //   target: 'react',
-      //   autoCodeSplitting: true,
-      //   routesDirectory: 'src/pages',
-      //   routeFileIgnorePrefix: '_content',
-      //   quoteStyle: 'single',
-      //   generatedRouteTree: './src/libs/router/route-tree.gen.ts',
-      // }),
-      TanStackRouterVite({
-        target: 'react',
-        autoCodeSplitting: true,
-        routesDirectory: path.resolve(__dirname, '../demo-react/src/pages'),
-        routeFileIgnorePrefix: '_content',
-        quoteStyle: 'single',
-        generatedRouteTree: path.resolve(
-          __dirname,
-          '../demo-react/src/router/route-tree.gen.ts'
-        ),
-      }),
       react({
         include: [
           path.resolve(__dirname, '../demo-react/src/*'),
