@@ -9,7 +9,8 @@
     "lint": "nx run-many --target=lint --all",
     "lint:fix": "nx run-many --target=lint --all --fix",
     "format": "prettier --write .",
-    "precommit": "pnpm run lint && pnpm run type-check"
+    "precommit": "pnpm run lint && pnpm run type-check",
+    "dev": "nx run-many -t dev -p @apps/demo @apps/demo-react"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
@@ -19,6 +20,7 @@
     "@radix-ui/react-select": "^2.2.4",
     "@radix-ui/react-slot": "^1.2.2",
     "@radix-ui/react-tabs": "^1.1.11",
+    "@radix-ui/react-tooltip": "^1.2.7",
     "@tanstack/react-router": "^1.120.2",
     "@tanstack/react-router-devtools": "^1.120.2",
     "@tanstack/vue-query": "^5.66.9",

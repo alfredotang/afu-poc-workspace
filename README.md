@@ -6,22 +6,33 @@
 
 - [Alfredo Tang's Vue Practice and POC project](#alfredo-tangs-vue-practice-and-poc-project)
   - [Table of Contents](#table-of-contents)
-  - [folder structure as router (vue)](#folder-structure-as-router-vue)
-  - [folder structure as router (react)](#folder-structure-as-router-react)
-  - [react and vue bridge](#react-and-vue-bridge)
-  - [Alison ui](#alison-ui)
-
-## folder structure as router (vue)
-
-see [vue.md](./docs/vue.md)
+  - [run project](#run-project)
+  - [documents](#documents)
 
 
-## folder structure as router (react)
-see [react.md](./docs/react.md)
+
+## run project
+
+```bash
+pnpm run dev
+```
 
 
-## react and vue bridge
-see [bridge.md](./docs/bridge.md)
+and open the following urls in browser:
+-  http://localhost:5173/
 
-## Alison ui
-see [alison-ui.md](./docs/alison-ui.md)
+> note: http://localhost:9999 is for react project
+
+
+
+
+
+## documents
+
+- [folder structure as router (vue)](./docs/vue.md)
+- [folder structure as router (react)](./docs/react.md)
+- [react and vue bridge](./docs/bridge.md)
+- [Alison ui](./docs/alison-ui.md)
+
+
+
