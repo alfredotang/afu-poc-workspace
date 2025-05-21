@@ -2,8 +2,9 @@
 
 ![bg.jpg](./docs/images/bg.jpg)
 
-## Table of Contents
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/alfredotang/afu-poc-workspace)
 
+## Table of Contents
 - [Alfredo Tang's POC workspace](#alfredo-tangs-poc-workspace)
   - [Table of Contents](#table-of-contents)
   - [run project](#run-project)
