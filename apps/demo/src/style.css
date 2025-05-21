@@ -34,7 +34,7 @@ html {
 }
 
 body {
-  color: var(--color-text);
+  color: var(--color-foreground);
   font-family: var(--font-inter);
   font-weight: normal;
   transition:

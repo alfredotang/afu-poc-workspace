@@ -1,0 +1,66 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "never"
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "eslint.enable": true,
+  "eslint.format.enable": true,
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+    "vue",
+    "html",
+    "json",
+    "jsonc",
+    "yaml",
+    "css",
+    "pcss",
+    "postcss"
+  ],
+  "eslint.options": {
+    "ignorePatterns": [
+      "node_modules",
+      "dist",
+      "*.svg",
+      "*.png",
+      "*.jpg",
+      "*.gif",
+      "*.webp",
+      "*.woff",
+      "*.woff2",
+      "*.eot",
+      "*.ttf",
+      "*.otf"
+    ]
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "[vue]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+    ["cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+    ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ],
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[svg]": {
+    "editor.defaultFormatter": "jock.svg"
+  },
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "tailwindCSS.files.exclude": ["**/dist/**"],
+  "[tailwindcss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
