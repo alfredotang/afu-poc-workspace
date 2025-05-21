@@ -59,6 +59,9 @@ const customClassesPlugin = plugin(({ addUtilities }) => {
   })
 })
 
+/**
+ * @deprecated define the theme in the css file instead.
+ */
 export default {
   theme: {
     extend: {
