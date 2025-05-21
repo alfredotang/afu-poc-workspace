@@ -1,83 +1,66 @@
 # React and Vue Bridge
 
 ## router
+Vue:
+in vue-repo, will still use the original router, but the router content will be **empty**.
+
+```html
+ <!-- vue-repo/src/pages/about.vue -->
+<template>
+  <noscript></noscript>
+</template>
+<script setup lang="ts">
+definePage({
+  meta: {
+    layouts: ['empty'],
+  },
+})
+</script>
+
+```
+
+React:
 ```tsx
 import { universalRouter } from '@libs/helpers/bridge'
 
-universalRouter.push({ 
-  path: '/user-console/bare-metal' 
-})
+universalRouter.pushVue('/user-console/bare-metal' )
 
-universalRouter.push({ 
-  path: '/user-console/bare-metal', query: { tab: 'iaas' } 
-})
+universalRouter.pushVue('/user-console/bare-metal', { tab: 'iaas' })
 
-universalRouter.push({ 
-  path: `/user-console/bare-metal/${bareMetalId}`, 
-  query: { tab: 'iaas' } 
-})
+universalRouter.pushVue(`/user-console/bare-metal/${bareMetalId}`, { tab: 'iaas' })
 
 ```
 
 
 ## store
-vue: 
+Vue: 
 ```ts
 import { defineStore } from 'pinia'
 import { useHelloStore } from 'xxx/react/store/hello'
+import { createVueStoreBridge } from '@libs/helpers/bridge'
+import { createReactStoreBridge } from '@libs/helpers/bridge'
 
-const store = defineStore('store', () => {
-  const hello = ref(useHelloStore.getState().hello)
+const useHelloStore = defineStore('store', () => createVueStoreBridge(useHelloStore))
 
-  const setHello = (hello: string) => {
-    useHelloStore.setState({ hello })
-  }
+const { hello, setHello } = useHelloStore()
 
-  useHelloStore.subscribe((state) => {
-    hello.value = state.hello
-  })
-
-  return {
-    hello,
-    setHello,
-  }
-})
+const onChangeHello = (newHello: string) => {
+  setHello(newHello)
+}
 ```
 
-react:
+React:
 ```tsx
 import { useAuthStore as useVueAuthStore } from 'xxx/vue/store/auth'
 import { create } from 'zustand'
+import { createReactStoreBridge } from '@libs/helpers/bridge'
 
-type AuthStore = {
-  getState: () => {
-    isLoggedIn: boolean
-    isOwner: boolean
-    userName: string
-  }
-  login: ReturnType<typeof useStore>['login']
-  logout: () => void
+const useAuthStore = createReactStoreBridge(useVueAuthStore)
+
+const user = useAuthStore(state => state.user)
+const setUser = useAuthStore(state => state.setUser)
+
+const onChangeUser = (newUser: User) => {
+  setUser(newUser)
 }
-
-export type ReactStore = {
-  framework: 'react' | 'vue'
-  setFramework: (framework: 'react' | 'vue') => void
-}
-
-export const useAuthStore = create<AuthStore>(() => ({
-  getState: () => {
-    const { isLoggedIn, isOwner, userName } = useVueAuthStore?.() || {
-      isLoggedIn: false,
-      isOwner: false,
-      userName: '',
-    }
-    return {
-      isLoggedIn,
-      isOwner,
-      userName,
-    }
-  },
-  login: payload => useStore().login(payload),
-  logout: () => useStore().logout(),
-}))
 ```

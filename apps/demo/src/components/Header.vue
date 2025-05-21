@@ -15,9 +15,15 @@
     </nav>
     <button
       class="btn btn-ghost"
-      @click="setFramework(framework === 'react' ? 'vue' : 'react')"
+      @click="onToggleFramework"
     >
       {{ framework }}
+    </button>
+    <button
+      class="btn btn-ghost"
+      @click="onToggleHello"
+    >
+      {{ hello }}
     </button>
     <Login />
   </header>
@@ -31,10 +37,13 @@ import {
   useFrameworkStore,
   useFrameworkStoreRefs,
 } from '@apps/demo/store/framework'
+import { useHelloStore, useHelloStoreRefs } from '@apps/demo/store/hello'
 import { cn } from '@libs/helpers/className'
 
 const { setFramework } = useFrameworkStore()
 const { framework } = useFrameworkStoreRefs()
+const { hello } = useHelloStoreRefs()
+const { setHello } = useHelloStore()
 const routes: Array<{ label: string; name: RouteRecordName }> = [
   { name: '/(home)/', label: 'home' },
   { name: '/user-console/resource-overview/', label: 'Resource Overview' },
@@ -43,4 +52,14 @@ const routes: Array<{ label: string; name: RouteRecordName }> = [
   { name: '/cart/', label: 'cart' },
   { name: '/callback/', label: 'callback' },
 ]
+
+const onToggleFramework = () => {
+  const newFramework = framework.value === 'react' ? 'vue' : 'react'
+  setFramework(newFramework)
+}
+
+const onToggleHello = () => {
+  const newHello = hello.value === 'hello' ? 'world' : 'hello'
+  setHello(newHello)
+}
 </script>

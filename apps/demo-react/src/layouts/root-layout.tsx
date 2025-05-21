@@ -1,13 +1,12 @@
 import { Alert, AlertTitle } from '@alison-ui/alert'
 import { Button } from '@alison-ui/button'
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@alison-ui/tooltip'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@alison-ui/tooltip'
 import UniversalLink from '@apps/demo-react/components/universal-link'
-import { useAuthStore, useReactStore } from '@apps/demo-react/stores'
+import {
+  useAuthStore,
+  useHelloStore,
+  useFrameworkStore,
+} from '@apps/demo-react/stores'
 import { universalRouter } from '@libs/helpers/bridges'
 import { LinkProps } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
@@ -50,38 +49,36 @@ const headerRoute = [
 }[]
 
 const LoginButton = () => {
-  const { getState, logout } = useAuthStore()
+  const { isLoggedIn, userName, logout } = useAuthStore()
   const toggleLogin = () => {
-    if (getState().isLoggedIn) {
+    if (isLoggedIn) {
       logout()
       return
     }
 
-    universalRouter.pushVue({ path: '/auth/signin' })
+    universalRouter.pushVue('/auth/signin')
   }
 
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button
-            variant={getState().isLoggedIn ? 'ghost' : 'default'}
-            onClick={toggleLogin}
-          >
-            <img
-              v-show="isLoggedIn"
-              className="size-10"
-              src="https://pansci.asia/wp-content/uploads/2016/11/f4ba5977f2f0519a10c9f9bd66cefc89-560x576.png"
-              alt="pokemon"
-            />
-            <span>{getState().isLoggedIn ? getState().userName : 'Login'}</span>
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>{getState().isLoggedIn ? 'logout' : undefined}</p>
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button
+          variant={isLoggedIn ? 'ghost' : 'default'}
+          onClick={toggleLogin}
+        >
+          <img
+            v-show="isLoggedIn"
+            className="size-10"
+            src="https://pansci.asia/wp-content/uploads/2016/11/f4ba5977f2f0519a10c9f9bd66cefc89-560x576.png"
+            alt="pokemon"
+          />
+          <span>{isLoggedIn ? userName : 'Login'}</span>
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>{isLoggedIn ? 'logout' : undefined}</p>
+      </TooltipContent>
+    </Tooltip>
   )
 }
 
@@ -90,8 +87,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const { framework, setFramework } = useReactStore()
-
+  const { framework, setFramework } = useFrameworkStore()
+  const hello = useHelloStore(state => state.hello)
+  const setHello = useHelloStore(state => state.setHello)
   return (
     <div className="flex min-h-screen flex-col">
       <Alert>
@@ -114,6 +112,12 @@ export default function RootLayout({
           onClick={() => setFramework(framework === 'react' ? 'vue' : 'react')}
         >
           {framework}
+        </Button>
+        <Button
+          variant="ghost"
+          onClick={() => setHello(hello === 'hello' ? 'world' : 'hello')}
+        >
+          {hello}
         </Button>
         <LoginButton />
       </header>

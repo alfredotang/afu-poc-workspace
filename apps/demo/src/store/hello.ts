@@ -2,14 +2,14 @@ import { defineStore, storeToRefs } from 'pinia'
 import { ref } from 'vue'
 
 export const useHelloStore = defineStore('hello', () => {
-  const name = ref('hello')
-  const setName = (newName: string) => {
-    name.value = newName
+  const hello = ref('hello')
+  const setHello = (newHello: string) => {
+    hello.value = newHello
   }
 
   return {
-    name,
-    setName,
+    hello,
+    setHello,
   }
 })
 

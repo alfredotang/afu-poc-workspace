@@ -15,7 +15,7 @@ export default function UniversalLink({
     return (
       <Button
         variant="ghost"
-        onClick={() => universalRouter.pushVue({ path: toVue || '' })}
+        onClick={() => universalRouter.pushVue(toVue || '')}
       >
         {children}
       </Button>
