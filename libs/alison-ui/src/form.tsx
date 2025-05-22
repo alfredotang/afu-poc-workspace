@@ -1,10 +1,12 @@
 'use client'
 
+import * as React from 'react'
+
 import { Label } from '@alison-ui/label'
+
 import { cn } from '@libs/helpers/className'
 import * as LabelPrimitive from '@radix-ui/react-label'
 import { Slot } from '@radix-ui/react-slot'
-import * as React from 'react'
 import {
   Controller,
   FormProvider,

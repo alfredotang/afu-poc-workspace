@@ -1,19 +1,17 @@
-import { useStore as useVueStore } from '@apps/demo/store'
+import { useAuthStore as useVueAuthStore } from '@apps/demo/store/auth'
 import { useHelloStore as useVueHelloStore } from '@apps/demo/store/hello'
 import { createReactStoreBridge } from '@libs/helpers/bridges'
 import { create } from 'zustand'
 
 export type ReactStore = {
-  framework: 'react' | 'vue'
-  setFramework: (framework: 'react' | 'vue') => void
+  framework: 'vue' | 'This is defined in react'
+  setFramework: (framework: 'vue' | 'This is defined in react') => void
 }
 
-export const useAuthStore = create<ReturnType<typeof useVueStore>>(() =>
-  useVueStore()
-)
+export const useAuthStore = createReactStoreBridge(useVueAuthStore)
 
 export const useFrameworkStore = create<ReactStore>(set => ({
-  framework: 'react',
+  framework: 'This is defined in react',
   setFramework: framework => {
     set({ framework })
   },

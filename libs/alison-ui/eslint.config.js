@@ -2,7 +2,6 @@ import baseConfig from '../../eslint.config.js'
 
 export default [
   ...baseConfig,
-  ...baseConfig,
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx', '**/*.vue'],
     rules: {

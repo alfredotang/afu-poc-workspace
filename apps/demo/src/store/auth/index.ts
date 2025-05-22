@@ -2,6 +2,7 @@ import { defineStore, storeToRefs } from 'pinia'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
+import { useGetPokemonListQuery } from '@apps/demo/composables/query/pokemon'
 import cookie from '@libs/helpers/cookie'
 import { jwtDecode, type JwtPayload } from 'jwt-decode'
 
@@ -16,10 +17,12 @@ const getJWTPayload = (token?: string) => {
   )
 }
 
-export const useStore = defineStore('main', () => {
+export const useAuthStore = defineStore('auth', () => {
   const router = useRouter()
   const accessToken = ref(cookie.get(ACCESS_TOKEN_KEY))
   const isLoggedIn = ref(Boolean(accessToken.value))
+  const { data: pokemonList, isFetching: isFetchingPokemonList } =
+    useGetPokemonListQuery()
 
   const isOwner = ref(getJWTPayload(accessToken.value)?.role === 'owner')
   const userName = ref(getJWTPayload(accessToken.value)?.name || '')
@@ -53,7 +56,9 @@ export const useStore = defineStore('main', () => {
     isOwner,
     login,
     logout,
+    pokemonList,
+    isFetchingPokemonList,
   }
 })
 
-export const useStoreRefs = () => storeToRefs(useStore())
+export const useAuthStoreRefs = () => storeToRefs(useAuthStore())

@@ -1,8 +1,9 @@
 'use client'
 
+import * as React from 'react'
+
 import { cn } from '@libs/helpers/className'
 import * as TabsPrimitive from '@radix-ui/react-tabs'
-import * as React from 'react'
 
 function Tabs({
   className,

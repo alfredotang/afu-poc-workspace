@@ -1,5 +1,6 @@
-import { Alert, AlertTitle } from '@alison-ui/alert'
 import { createFileRoute, Outlet } from '@tanstack/react-router'
+
+import { Alert, AlertTitle } from '@alison-ui/alert'
 
 export const Route = createFileRoute('/about')({
   component: RouteComponent,

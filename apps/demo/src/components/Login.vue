@@ -20,11 +20,11 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 
-import { useStoreRefs, useStore } from '@apps/demo/store'
+import { useAuthStoreRefs, useAuthStore } from '@apps/demo/store/auth'
 import { cn } from '@libs/helpers/className'
 
-const { isLoggedIn, userName } = useStoreRefs()
-const { logout } = useStore()
+const { isLoggedIn, userName } = useAuthStoreRefs()
+const { logout } = useAuthStore()
 const router = useRouter()
 
 const toggleLogin = () => {

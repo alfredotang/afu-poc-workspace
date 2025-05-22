@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from 'vue-router/auto-routes'
 
-import { useStoreRefs } from '@apps/demo/store'
+import { useAuthStoreRefs } from '@apps/demo/store/auth'
 
 console.log({ routes })
 
@@ -13,7 +13,7 @@ const router = createRouter({
 export default router
 
 router.beforeEach((to, _from, next) => {
-  const { isOwner, isLoggedIn } = useStoreRefs()
+  const { isOwner, isLoggedIn } = useAuthStoreRefs()
   if (to.meta.requiresOwner && !isOwner.value) {
     return next({ name: '/401' })
   }

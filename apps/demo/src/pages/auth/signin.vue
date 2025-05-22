@@ -25,8 +25,8 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 
-import { useStore } from '@apps/demo/store'
-import { ACCESS_TOKEN_DICT } from '@apps/demo/store/constants'
+import { useAuthStore } from '@apps/demo/store/auth'
+import { ACCESS_TOKEN_DICT } from '@apps/demo/store/auth/constants'
 
 definePage({
   meta: {
@@ -35,7 +35,7 @@ definePage({
   },
 })
 
-const { login } = useStore()
+const { login } = useAuthStore()
 
 const options = computed(
   () => Object.keys(ACCESS_TOKEN_DICT) as Array<keyof typeof ACCESS_TOKEN_DICT>

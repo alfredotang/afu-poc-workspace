@@ -54,12 +54,16 @@ const routes: Array<{ label: string; name: RouteRecordName }> = [
 ]
 
 const onToggleFramework = () => {
-  const newFramework = framework.value === 'react' ? 'vue' : 'react'
+  const newFramework =
+    framework.value === 'vue' ? 'This is defined in react' : 'vue'
   setFramework(newFramework)
 }
 
 const onToggleHello = () => {
-  const newHello = hello.value === 'hello' ? 'world' : 'hello'
+  const newHello =
+    hello.value === 'this is defined in vue'
+      ? 'react'
+      : 'this is defined in vue'
   setHello(newHello)
 }
 </script>

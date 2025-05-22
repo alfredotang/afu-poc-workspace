@@ -1,6 +1,8 @@
-import { Button } from '@alison-ui/button'
-import { universalRouter } from '@libs/helpers/bridges'
 import { Link, type LinkProps } from '@tanstack/react-router'
+
+import { Button } from '@alison-ui/button'
+
+import { universalRouter } from '@libs/helpers/bridges'
 
 export default function UniversalLink({
   to,

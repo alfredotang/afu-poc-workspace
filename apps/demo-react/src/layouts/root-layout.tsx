@@ -1,6 +1,9 @@
+import { LinkProps } from '@tanstack/react-router'
+
 import { Alert, AlertTitle } from '@alison-ui/alert'
 import { Button } from '@alison-ui/button'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@alison-ui/tooltip'
+
 import UniversalLink from '@apps/demo-react/components/universal-link'
 import {
   useAuthStore,
@@ -8,7 +11,6 @@ import {
   useFrameworkStore,
 } from '@apps/demo-react/stores'
 import { universalRouter } from '@libs/helpers/bridges'
-import { LinkProps } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 
 const headerRoute = [
@@ -109,13 +111,23 @@ export default function RootLayout({
         </nav>
         <Button
           variant="ghost"
-          onClick={() => setFramework(framework === 'react' ? 'vue' : 'react')}
+          onClick={() =>
+            setFramework(
+              framework === 'vue' ? 'This is defined in react' : 'vue'
+            )
+          }
         >
           {framework}
         </Button>
         <Button
           variant="ghost"
-          onClick={() => setHello(hello === 'hello' ? 'world' : 'hello')}
+          onClick={() =>
+            setHello(
+              hello === 'this is defined in vue'
+                ? 'react'
+                : 'this is defined in vue'
+            )
+          }
         >
           {hello}
         </Button>

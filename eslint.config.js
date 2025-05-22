@@ -117,6 +117,8 @@ export default [
           groups: [
             'node',
             'vite',
+            'react',
+            'alisonUi',
             'vue',
             'type',
             'primevue',

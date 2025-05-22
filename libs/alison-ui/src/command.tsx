@@ -1,16 +1,18 @@
 'use client'
 
+import * as React from 'react'
+
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from '@alison-ui/./dialog'
+} from '@alison-ui/dialog'
+
 import { cn } from '@libs/helpers/className'
 import { Command as CommandPrimitive } from 'cmdk'
 import { SearchIcon } from 'lucide-react'
-import * as React from 'react'
 
 function Command({
   className,

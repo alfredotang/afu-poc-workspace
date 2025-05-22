@@ -1,7 +1,8 @@
+import { unstable_batchedUpdates } from 'react-dom'
+
 import { ref } from 'vue'
 
 import camelCase from 'lodash/camelCase'
-import { unstable_batchedUpdates } from 'react-dom'
 import { type StoreApi, type UseBoundStore } from 'zustand'
 
 export function createVueStoreBridge<T>(store: UseBoundStore<StoreApi<T>>): T {
