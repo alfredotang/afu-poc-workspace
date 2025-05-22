@@ -1,3 +1,5 @@
+import path from 'node:path'
+
 import react from '@vitejs/plugin-react'
 import { mergeConfig } from 'vite'
 
@@ -21,6 +23,12 @@ const config: StorybookConfig = {
         // @see https://github.com/tailwindlabs/tailwindcss/discussions/16687#discussioncomment-12374574
         (await import('@tailwindcss/vite')).default(),
       ],
+      resolve: {
+        alias: {
+          // storybook is build with CommonJS, so __dirname is available
+          '@alison-ui': path.resolve(__dirname, '../src'),
+        },
+      },
     }),
 }
 

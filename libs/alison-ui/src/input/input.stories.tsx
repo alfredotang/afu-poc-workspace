@@ -1,3 +1,5 @@
+import type { Meta, StoryObj } from '@storybook/react'
+
 import { LockIcon } from 'lucide-react'
 
 import { Input } from '.'
@@ -5,9 +7,22 @@ import { Input } from '.'
 export default {
   component: Input,
   title: 'ui/input',
+  argTypes: {
+    leading: { control: 'text' },
+    trailing: { control: 'text' },
+    invalid: { control: 'boolean' },
+    disabled: { control: 'boolean' },
+    placeholder: { control: 'text' },
+  },
+} satisfies Meta<typeof Input>
+
+export const Default: StoryObj<typeof Input> = {
+  args: {
+    placeholder: 'Enter your text',
+  },
 }
 
-export const Default = () => (
+export const Overview = () => (
   <div className="flex gap-4">
     <Input />
     <Input disabled />

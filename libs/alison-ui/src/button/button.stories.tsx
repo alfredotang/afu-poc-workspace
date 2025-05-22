@@ -1,3 +1,5 @@
+import type { Meta, StoryObj } from '@storybook/react'
+
 import { PlusIcon } from 'lucide-react'
 
 import { Button } from '.'
@@ -5,9 +7,49 @@ import { Button } from '.'
 export default {
   component: Button,
   title: 'ui/button',
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: [
+        'default',
+        'outline',
+        'ghost',
+        'link',
+        'destructive',
+        'secondary',
+      ],
+      table: {
+        defaultValue: { summary: 'default' },
+        type: {
+          summary: 'default | outline | ghost | link | destructive | secondary',
+        },
+      },
+    },
+    size: {
+      control: 'select',
+      options: ['default', 'sm', 'icon', 'lg'],
+      table: {
+        defaultValue: { summary: 'default' },
+        type: { summary: 'default | sm | icon | lg' },
+      },
+    },
+    disabled: {
+      control: 'boolean',
+      table: {
+        defaultValue: { summary: 'false' },
+        type: { summary: 'boolean' },
+      },
+    },
+  },
+} satisfies Meta<typeof Button>
+
+export const Default: StoryObj<typeof Button> = {
+  args: {
+    children: 'Button',
+  },
 }
 
-export const Default = () => {
+export const Overview = () => {
   return (
     <div className="flex flex-col gap-4">
       {/* Default */}
