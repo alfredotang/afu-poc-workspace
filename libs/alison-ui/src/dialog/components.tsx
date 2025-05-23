@@ -6,10 +6,45 @@ import { cn } from '@libs/helpers/className'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { XIcon } from 'lucide-react'
 
+const DialogContext = React.createContext<{
+  closable?: boolean
+  closeIcon?: React.ReactNode
+  title?: React.ReactNode
+  description?: React.ReactNode
+}>({
+  closable: undefined,
+  closeIcon: undefined,
+  title: undefined,
+  description: undefined,
+})
+
+const useDialogContext = () => {
+  const context = React.useContext(DialogContext)
+
+  if (!context) {
+    throw new Error('useDialogContext must be used within a Dialog component')
+  }
+
+  return context
+}
+
 function Dialog({
+  closable,
+  closeIcon,
+  title,
+  description,
   ...props
-}: React.ComponentProps<typeof DialogPrimitive.Root>) {
-  return <DialogPrimitive.Root data-slot="dialog" {...props} />
+}: React.ComponentProps<typeof DialogPrimitive.Root> & {
+  closable?: boolean
+  closeIcon?: React.ReactNode
+  title?: React.ReactNode
+  description?: React.ReactNode
+}) {
+  return (
+    <DialogContext.Provider value={{ closable, closeIcon, title, description }}>
+      <DialogPrimitive.Root data-slot="dialog" {...props} />
+    </DialogContext.Provider>
+  )
 }
 
 function DialogTrigger({
@@ -46,11 +81,37 @@ function DialogOverlay({
   )
 }
 
+function DialogCloseIcon() {
+  const { closable, closeIcon } = useDialogContext()
+  const isClosable = React.useMemo(() => closable ?? true, [closable])
+
+  if (!isClosable) return null
+
+  return (
+    <DialogPrimitive.Close className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4">
+      {closeIcon ?? <XIcon />}
+      <span className="sr-only">Close</span>
+    </DialogPrimitive.Close>
+  )
+}
+
+function DialogContentHeader() {
+  const { title, description } = useDialogContext()
+
+  if (!title && !description) return null
+  return (
+    <DialogHeader>
+      <DialogTitle>{title}</DialogTitle>
+      <DialogDescription>{description}</DialogDescription>
+    </DialogHeader>
+  )
+}
+
 function DialogContent({
   className,
   children,
   ...props
-}: React.ComponentProps<typeof DialogPrimitive.Content>) {
+}: React.ComponentProps<typeof DialogPrimitive.Content> & {}) {
   return (
     <DialogPortal data-slot="dialog-portal">
       <DialogOverlay />
@@ -62,11 +123,9 @@ function DialogContent({
         )}
         {...props}
       >
+        <DialogContentHeader />
         {children}
-        <DialogPrimitive.Close className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4">
-          <XIcon />
-          <span className="sr-only">Close</span>
-        </DialogPrimitive.Close>
+        <DialogCloseIcon />
       </DialogPrimitive.Content>
     </DialogPortal>
   )
@@ -122,14 +181,14 @@ function DialogDescription({
 }
 
 export {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogOverlay,
-  DialogPortal,
-  DialogTitle,
-  DialogTrigger,
+  Dialog as Root,
+  DialogClose as Close,
+  DialogContent as Content,
+  DialogDescription as Description,
+  DialogFooter as Footer,
+  DialogHeader as Header,
+  DialogOverlay as Overlay,
+  DialogPortal as Portal,
+  DialogTitle as Title,
+  DialogTrigger as Trigger,
 }

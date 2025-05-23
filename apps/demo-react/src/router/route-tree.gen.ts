@@ -12,7 +12,9 @@
 
 import { Route as rootRoute } from './../pages/__root'
 import { Route as AboutRouteImport } from './../pages/about/route'
+import { Route as HelloIndexImport } from './../pages/hello/index'
 import { Route as AboutIndexImport } from './../pages/about/index'
+import { Route as HelloIdImport } from './../pages/hello/$id'
 import { Route as AboutAboutIdImport } from './../pages/about/$aboutId'
 
 // Create/Update Routes
@@ -23,10 +25,22 @@ const AboutRouteRoute = AboutRouteImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const HelloIndexRoute = HelloIndexImport.update({
+  id: '/hello/',
+  path: '/hello/',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const AboutIndexRoute = AboutIndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AboutRouteRoute,
+} as any)
+
+const HelloIdRoute = HelloIdImport.update({
+  id: '/hello/$id',
+  path: '/hello/$id',
+  getParentRoute: () => rootRoute,
 } as any)
 
 const AboutAboutIdRoute = AboutAboutIdImport.update({
@@ -53,12 +67,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutAboutIdImport
       parentRoute: typeof AboutRouteImport
     }
+    '/hello/$id': {
+      id: '/hello/$id'
+      path: '/hello/$id'
+      fullPath: '/hello/$id'
+      preLoaderRoute: typeof HelloIdImport
+      parentRoute: typeof rootRoute
+    }
     '/about/': {
       id: '/about/'
       path: '/'
       fullPath: '/about/'
       preLoaderRoute: typeof AboutIndexImport
       parentRoute: typeof AboutRouteImport
+    }
+    '/hello/': {
+      id: '/hello/'
+      path: '/hello'
+      fullPath: '/hello'
+      preLoaderRoute: typeof HelloIndexImport
+      parentRoute: typeof rootRoute
     }
   }
 }
@@ -82,36 +110,52 @@ const AboutRouteRouteWithChildren = AboutRouteRoute._addFileChildren(
 export interface FileRoutesByFullPath {
   '/about': typeof AboutRouteRouteWithChildren
   '/about/$aboutId': typeof AboutAboutIdRoute
+  '/hello/$id': typeof HelloIdRoute
   '/about/': typeof AboutIndexRoute
+  '/hello': typeof HelloIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/about/$aboutId': typeof AboutAboutIdRoute
+  '/hello/$id': typeof HelloIdRoute
   '/about': typeof AboutIndexRoute
+  '/hello': typeof HelloIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/about': typeof AboutRouteRouteWithChildren
   '/about/$aboutId': typeof AboutAboutIdRoute
+  '/hello/$id': typeof HelloIdRoute
   '/about/': typeof AboutIndexRoute
+  '/hello/': typeof HelloIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/about' | '/about/$aboutId' | '/about/'
+  fullPaths: '/about' | '/about/$aboutId' | '/hello/$id' | '/about/' | '/hello'
   fileRoutesByTo: FileRoutesByTo
-  to: '/about/$aboutId' | '/about'
-  id: '__root__' | '/about' | '/about/$aboutId' | '/about/'
+  to: '/about/$aboutId' | '/hello/$id' | '/about' | '/hello'
+  id:
+    | '__root__'
+    | '/about'
+    | '/about/$aboutId'
+    | '/hello/$id'
+    | '/about/'
+    | '/hello/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   AboutRouteRoute: typeof AboutRouteRouteWithChildren
+  HelloIdRoute: typeof HelloIdRoute
+  HelloIndexRoute: typeof HelloIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   AboutRouteRoute: AboutRouteRouteWithChildren,
+  HelloIdRoute: HelloIdRoute,
+  HelloIndexRoute: HelloIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -124,7 +168,9 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/about"
+        "/about",
+        "/hello/$id",
+        "/hello/"
       ]
     },
     "/about": {
@@ -138,9 +184,15 @@ export const routeTree = rootRoute
       "filePath": "about/$aboutId.tsx",
       "parent": "/about"
     },
+    "/hello/$id": {
+      "filePath": "hello/$id.tsx"
+    },
     "/about/": {
       "filePath": "about/index.tsx",
       "parent": "/about"
+    },
+    "/hello/": {
+      "filePath": "hello/index.tsx"
     }
   }
 }
