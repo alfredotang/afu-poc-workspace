@@ -102,7 +102,7 @@ export const ControlledDialog = () => {
   return (
     <>
       <Button onClick={() => setOpen(true)}>Open Dialog</Button>
-      <Dialog.Root open={open} onOpenChange={setOpen}>
+      <Dialog.Root open={open} closable={false}>
         <Dialog.Content>
           <div>
             <p>
