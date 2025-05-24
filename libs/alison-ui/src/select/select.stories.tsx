@@ -78,15 +78,67 @@ export const Default: StoryObj<typeof Select> = {
 
 export const Overview = () => {
   return (
-    <div className="flex flex-col gap-4">
-      <Select options={singleGroupOptions} placeholder="Select an option" />
-      <Select options={groupOptions} placeholder="Select an option" />
-      <Select
-        options={singleGroupOptions}
-        placeholder="Select an option"
-        size="sm"
-      />
-      <Select options={groupOptions} placeholder="Select an option" size="sm" />
+    <div className="space-y-4">
+      <div className="grid grid-cols-3 gap-4">
+        <Select options={singleGroupOptions} placeholder="Select an option" />
+        <Select
+          options={singleGroupOptions}
+          placeholder="Select an option"
+          disabled
+        />
+        <Select
+          options={singleGroupOptions}
+          placeholder="Select an option"
+          invalid
+        />
+      </div>
+      <div className="grid grid-cols-3 gap-4">
+        <Select
+          options={singleGroupOptions}
+          placeholder="Select an option"
+          size="sm"
+        />
+        <Select
+          options={singleGroupOptions}
+          placeholder="Select an option"
+          size="sm"
+          disabled
+        />
+        <Select
+          options={singleGroupOptions}
+          placeholder="Select an option"
+          size="sm"
+          invalid
+        />
+      </div>
+      <div className="grid grid-cols-3 gap-4">
+        <Select options={groupOptions} placeholder="Select an option" />
+        <Select
+          options={groupOptions}
+          placeholder="Select an option"
+          disabled
+        />
+        <Select options={groupOptions} placeholder="Select an option" invalid />
+      </div>
+      <div className="grid grid-cols-3 gap-4">
+        <Select
+          options={groupOptions}
+          placeholder="Select an option"
+          size="sm"
+        />
+        <Select
+          options={groupOptions}
+          placeholder="Select an option"
+          size="sm"
+          disabled
+        />
+        <Select
+          options={groupOptions}
+          placeholder="Select an option"
+          size="sm"
+          invalid
+        />
+      </div>
     </div>
   )
 }
@@ -105,5 +157,25 @@ export const Sizes = () => {
         size="sm"
       />
     </div>
+  )
+}
+
+export const Disabled = () => {
+  return (
+    <Select
+      options={singleGroupOptions}
+      placeholder="Select an option"
+      disabled
+    />
+  )
+}
+
+export const Invalid = () => {
+  return (
+    <Select
+      options={singleGroupOptions}
+      placeholder="Select an option"
+      invalid
+    />
   )
 }

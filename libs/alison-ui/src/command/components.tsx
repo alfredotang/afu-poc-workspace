@@ -29,10 +29,7 @@ function CommandDialog({
   description = 'Search for a command to run...',
   children,
   ...props
-}: React.ComponentProps<typeof Dialog.Root> & {
-  title?: string
-  description?: string
-}) {
+}: React.ComponentProps<typeof Dialog.Root>) {
   return (
     <Dialog.Root {...props}>
       <Dialog.Header className="sr-only">
@@ -160,13 +157,13 @@ function CommandShortcut({
 }
 
 export {
-  Command,
-  CommandDialog,
-  CommandInput,
-  CommandList,
-  CommandEmpty,
-  CommandGroup,
-  CommandItem,
-  CommandShortcut,
-  CommandSeparator,
+  Command as Root,
+  CommandDialog as Dialog,
+  CommandInput as Input,
+  CommandList as List,
+  CommandEmpty as Empty,
+  CommandGroup as Group,
+  CommandItem as Item,
+  CommandShortcut as Shortcut,
+  CommandSeparator as Separator,
 }

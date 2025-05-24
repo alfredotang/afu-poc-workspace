@@ -1,3 +1,5 @@
+import reactHooks from 'eslint-plugin-react-hooks'
+
 import baseConfig from '../../eslint.config.js'
 
 export default [
@@ -23,7 +25,16 @@ export default [
           ],
         },
       ],
-      'vue/multi-word-component-names': 'off',
+    },
+  },
+  {
+    files: ['**/*.{ts,tsx}'],
+    plugins: {
+      'react-hooks': reactHooks,
+    },
+    rules: {
+      'react-hooks/exhaustive-deps': 'warn',
+      'react-hooks/rules-of-hooks': 'error',
     },
   },
 ]

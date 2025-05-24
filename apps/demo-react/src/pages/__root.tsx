@@ -3,7 +3,7 @@ import { createRootRoute, Outlet, useMatches } from '@tanstack/react-router'
 import RootLayout from '../layouts/root-layout'
 
 export const Route = createRootRoute({
-  component: () => {
+  component: function Root() {
     const route = useMatches({
       select: matched => matched[matched.length - 1],
     })

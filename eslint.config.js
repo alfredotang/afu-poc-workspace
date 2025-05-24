@@ -1,5 +1,3 @@
-import vueParser from 'vue-eslint-parser'
-
 import eslint from '@eslint/js'
 import nx from '@nx/eslint-plugin'
 import tsParser from '@typescript-eslint/parser'
@@ -61,22 +59,6 @@ export default [
       globals: {
         ...globals.browser,
         ...globals.node,
-        computed: 'readonly',
-        defineEmits: 'readonly',
-        defineExpose: 'readonly',
-        defineProps: 'readonly',
-        defineSlots: 'readonly',
-        definePage: 'readonly',
-        onMounted: 'readonly',
-        onUnmounted: 'readonly',
-        reactive: 'readonly',
-        ref: 'readonly',
-        shallowReactive: 'readonly',
-        shallowRef: 'readonly',
-        toRef: 'readonly',
-        toRefs: 'readonly',
-        watch: 'readonly',
-        watchEffect: 'readonly',
         expect: 'readonly',
         test: 'readonly',
       },
@@ -158,25 +140,6 @@ export default [
       ],
       'perfectionist/sort-exports': 'error',
       'unicorn/prefer-node-protocol': 'error',
-    },
-  },
-  {
-    files: ['**/*.vue'],
-    plugins: { vue: pluginVue },
-    languageOptions: {
-      parser: vueParser,
-      parserOptions: {
-        parser: tsParser,
-        extraFileExtensions: ['.vue'],
-        ecmaFeatures: { jsx: true },
-        sourceType: 'module',
-      },
-    },
-    processor: pluginVue.processors['.vue'],
-    rules: {
-      'vue/block-order': ['error', { order: ['template', 'script', 'style'] }],
-      'vue/attribute-hyphenation': 'off',
-      'vue/multi-word-component-names': 'off',
     },
   },
   prettierPlugin, // must at last line
