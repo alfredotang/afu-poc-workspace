@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Combobox, type ComboboxOption } from './index'
 
 export default {
-  title: 'ui/combobox',
+  title: 'forms/combobox',
   component: Combobox,
   argTypes: {
     options: {

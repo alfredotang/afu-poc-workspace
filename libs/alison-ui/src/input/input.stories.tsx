@@ -6,7 +6,7 @@ import { Input } from '.'
 
 export default {
   component: Input,
-  title: 'ui/input',
+  title: 'forms/input',
   argTypes: {
     leading: { control: 'text' },
     trailing: { control: 'text' },

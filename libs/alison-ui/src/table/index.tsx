@@ -70,7 +70,8 @@ function TableHead({ className, ...props }: React.ComponentProps<'th'>) {
     <th
       data-slot="table-head"
       className={cn(
-        'text-foreground h-10 px-2 text-left align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
+        '[&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
+        'text-foreground h-10 px-2 text-left align-middle font-medium whitespace-nowrap',
         className
       )}
       {...props}
@@ -83,7 +84,8 @@ function TableCell({ className, ...props }: React.ComponentProps<'td'>) {
     <td
       data-slot="table-cell"
       className={cn(
-        'p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
+        '[&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
+        'p-2 align-middle whitespace-nowrap',
         className
       )}
       {...props}
@@ -105,12 +107,12 @@ function TableCaption({
 }
 
 export {
-  Table,
-  TableHeader,
-  TableBody,
-  TableFooter,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableCaption,
+  Table as Root,
+  TableHeader as Header,
+  TableBody as Body,
+  TableFooter as Footer,
+  TableHead as Head,
+  TableRow as Row,
+  TableCell as Cell,
+  TableCaption as Caption,
 }

@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Select, type SelectGroupOption } from './index'
 
 export default {
-  title: 'ui/select',
+  title: 'forms/select',
   component: Select,
   argTypes: {
     options: {
