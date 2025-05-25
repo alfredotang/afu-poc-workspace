@@ -10,6 +10,12 @@
       "options": {
         "command": "cd libs/alison-ui && tsc --noEmit"
       }
+    },
+    "sb": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "storybook dev --no-open -c libs/alison-ui/.storybook -p 6006"
+      }
     }
   }
 }
