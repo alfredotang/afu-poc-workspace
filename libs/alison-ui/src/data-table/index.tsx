@@ -30,17 +30,20 @@ function DataTable<T>({
 }) {
   return (
     <div
-      className={cn(
-        'relative flex max-h-(--table-max-height) flex-col gap-4 overflow-auto',
-        className
-      )}
-      style={{ '--table-max-height': maxHeight } as React.CSSProperties}
+      className={cn('flex flex-col gap-4', className)}
+      data-element="data-table-container"
     >
-      <Table.Root>
-        <DataTableHeader {...props} />
-        <DataTableBody {...props} />
-        <DataTableFooter {...props} />
-      </Table.Root>
+      <div
+        data-element="data-table-inner"
+        className="relative flex max-h-(--table-max-height) flex-col gap-4 overflow-auto rounded-md border"
+        style={{ '--table-max-height': maxHeight } as React.CSSProperties}
+      >
+        <Table.Root>
+          <DataTableHeader {...props} />
+          <DataTableBody {...props} />
+          <DataTableFooter {...props} />
+        </Table.Root>
+      </div>
       <DataTablePagination {...props} />
     </div>
   )

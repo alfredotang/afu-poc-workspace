@@ -36,11 +36,13 @@ function DataTableFooter<T>({
 
 function DataTableHeader<T>({ table, stickyHeader }: DataTableProps<T>) {
   return (
-    <Table.Header className={cn(stickyHeader && 'sticky top-0')}>
+    <Table.Header className={cn({ 'sticky top-0': stickyHeader })}>
       {table.getHeaderGroups().map((headerGroup, headerGroupIndex) => (
         <Table.Row
           key={`${headerGroup.id}`}
-          className={cn('hover:bg-[none]', stickyHeader && 'backdrop-blur-2xl')}
+          className={cn('hover:bg-[none]', {
+            'backdrop-blur-2xl': stickyHeader,
+          })}
         >
           {headerGroup.headers.map((item, itemIndex) => (
             <Table.Head
@@ -111,7 +113,7 @@ function DataTablePagination<T>({
     )
 
   return (
-    <Pagination.Root className="my-4">
+    <Pagination.Root className="m-4">
       <Pagination.Content>
         <Pagination.Previous
           onClick={() => table.previousPage()}

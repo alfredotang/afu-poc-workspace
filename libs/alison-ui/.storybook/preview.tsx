@@ -1,6 +1,7 @@
+import './storybook.css'
+
 import type { Preview } from '@storybook/react'
 
-import './storybook.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 const queryClient = new QueryClient({
@@ -23,9 +24,11 @@ const preview: Preview = {
   tags: ['autodocs'],
   decorators: [
     Story => (
-      <QueryClientProvider client={queryClient}>
-        <Story />
-      </QueryClientProvider>
+      <>
+        <QueryClientProvider client={queryClient}>
+          <Story />
+        </QueryClientProvider>
+      </>
     ),
   ],
 }

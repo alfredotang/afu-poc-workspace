@@ -4,7 +4,7 @@ import { Skeleton } from '.'
 
 export default {
   component: Skeleton,
-  title: 'feedback/skeleton',
+  title: 'ui/skeleton',
   argTypes: {
     className: { control: 'text' },
   },
