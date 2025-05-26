@@ -20,7 +20,11 @@ export default {
         },
       },
     },
-    onChange: { action: 'changed' },
+    onChange: {
+      table: {
+        type: { summary: '(value: string) => void' },
+      },
+    },
     value: { control: 'text' },
     placeholder: { control: 'text' },
     size: {
