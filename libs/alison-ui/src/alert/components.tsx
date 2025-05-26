@@ -63,4 +63,4 @@ function AlertDescription({
   )
 }
 
-export { Alert, AlertTitle, AlertDescription }
+export { Alert as Root, AlertTitle as Title, AlertDescription as Description }

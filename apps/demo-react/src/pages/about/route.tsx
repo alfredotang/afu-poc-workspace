@@ -1,6 +1,6 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 
-import { Alert } from '@alison-ui/alert'
+import * as Alert from '@alison-ui/alert'
 
 export const Route = createFileRoute('/about')({
   component: RouteComponent,
@@ -9,7 +9,9 @@ export const Route = createFileRoute('/about')({
 function RouteComponent() {
   return (
     <div>
-      <Alert title="About layout" />
+      <Alert.Root>
+        <Alert.Title>About layout</Alert.Title>
+      </Alert.Root>
       <Outlet />
     </div>
   )

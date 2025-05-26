@@ -1,4 +1,4 @@
-import { Tooltip } from '@alison-ui/tooltip'
+import * as Tooltip from '@alison-ui/tooltip'
 
 import type { Meta } from '@storybook/react'
 
@@ -147,9 +147,12 @@ const defaultColumns = [
     header: () => (
       <div className="flex items-center gap-2">
         <span>Customized Header</span>
-        <Tooltip content="Actions">
-          <AngryIcon className="text-muted-foreground size-4" />
-        </Tooltip>
+        <Tooltip.Root>
+          <Tooltip.Trigger asChild>
+            <AngryIcon className="text-muted-foreground size-4" />
+          </Tooltip.Trigger>
+          <Tooltip.Content>Actions</Tooltip.Content>
+        </Tooltip.Root>
       </div>
     ),
     cell: info => <div>{'Hello ' + info.getValue()}</div>,

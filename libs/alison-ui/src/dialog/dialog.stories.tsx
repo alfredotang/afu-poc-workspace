@@ -80,12 +80,10 @@ export const Overview = () => (
       <Button>Open Dialog</Button>
     </Dialog.Trigger>
     <Dialog.Content>
-      <div>
-        <p>
-          Dialog content goes here. You can place any React component inside the
-          dialog.
-        </p>
-      </div>
+      <p>
+        Dialog content goes here. You can place any React component inside the
+        dialog.
+      </p>
       <Dialog.Footer>
         <Dialog.Close>
           <div className="flex gap-4">

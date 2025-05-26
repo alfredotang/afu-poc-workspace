@@ -1,53 +1,31 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta } from '@storybook/react'
 
-import { Alert } from '.'
+import * as Alert from '.'
 
 export default {
-  component: Alert,
+  component: Alert.Root,
   title: 'ui/alert',
-  argTypes: {
-    title: { control: 'text' },
-    description: { control: 'text' },
-    variant: {
-      control: 'inline-radio',
-      options: ['default', 'destructive'],
-      table: {
-        defaultValue: { summary: 'default' },
-        type: { summary: 'default | destructive' },
-      },
-    },
-  },
 } satisfies Meta<typeof Alert>
-
-export const Default: StoryObj<typeof Alert> = {
-  args: {
-    title: 'Default Alert',
-    description: 'This is a default alert.',
-    variant: 'default',
-  },
-}
 
 export const Overview = () => (
   <div className="flex flex-col gap-4">
-    <Alert title="Default Alert" description="This is a default alert." />
-    <Alert
-      title="Destructive Alert"
-      description="This is a destructive alert."
-      variant="destructive"
-    />
+    <Default />
+    <Destructive />
   </div>
 )
 
-export const WithTitle = () => <Alert title="Alert with Title" />
-
-export const WithDescription = () => (
-  <Alert description="Alert with only a description." />
+export const Default = () => (
+  <Alert.Root>
+    <Alert.Title>Default Alert</Alert.Title>
+    <Alert.Description>This is a default alert.</Alert.Description>
+  </Alert.Root>
 )
 
 export const Destructive = () => (
-  <Alert
-    title="Destructive Alert"
-    description="This alert indicates a destructive action."
-    variant="destructive"
-  />
+  <Alert.Root variant="destructive">
+    <Alert.Title>Destructive Alert</Alert.Title>
+    <Alert.Description>
+      This alert indicates a destructive action.
+    </Alert.Description>
+  </Alert.Root>
 )

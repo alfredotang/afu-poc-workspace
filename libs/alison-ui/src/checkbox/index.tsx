@@ -12,6 +12,9 @@ export type CheckboxProps = React.ComponentProps<
   invalid?: boolean
 }
 
+/**
+ * @see https://www.radix-ui.com/primitives/docs/components/checkbox
+ */
 function Checkbox({ className, invalid, ...props }: CheckboxProps) {
   return (
     <CheckboxPrimitive.Root

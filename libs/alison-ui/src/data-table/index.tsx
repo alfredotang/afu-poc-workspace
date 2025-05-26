@@ -20,6 +20,9 @@ export type DataTableProps<T> = {
   enabledPagination?: boolean
 }
 
+/**
+ * @see https://tanstack.com/table/latest/docs/introduction
+ */
 function DataTable<T>({
   className,
   maxHeight = 'auto',

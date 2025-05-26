@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import type { Meta } from '@storybook/react'
 
-import * as InputOTP from './index'
+import * as InputOTP from '.'
 
 export default {
   title: 'forms/input-otp',

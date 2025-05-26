@@ -1,8 +1,8 @@
 import { LinkProps } from '@tanstack/react-router'
 
-import { Alert } from '@alison-ui/alert'
+import * as Alert from '@alison-ui/alert'
 import { Button } from '@alison-ui/button'
-import { Tooltip } from '@alison-ui/tooltip'
+import * as Tooltip from '@alison-ui/tooltip'
 
 import UniversalLink from '@apps/demo-react/components/universal-link'
 import {
@@ -60,19 +60,26 @@ const LoginButton = () => {
 
     universalRouter.pushVue('/auth/signin')
   }
+  // content={}
 
   return (
-    <Tooltip content={isLoggedIn ? 'logout' : undefined}>
-      <Button variant={isLoggedIn ? 'ghost' : 'default'} onClick={toggleLogin}>
-        <img
-          v-show="isLoggedIn"
-          className="size-10"
-          src="https://pansci.asia/wp-content/uploads/2016/11/f4ba5977f2f0519a10c9f9bd66cefc89-560x576.png"
-          alt="pokemon"
-        />
-        <span>{isLoggedIn ? userName : 'Login'}</span>
-      </Button>
-    </Tooltip>
+    <Tooltip.Root>
+      <Tooltip.Trigger asChild>
+        <Button
+          variant={isLoggedIn ? 'ghost' : 'default'}
+          onClick={toggleLogin}
+        >
+          <img
+            v-show="isLoggedIn"
+            className="size-10"
+            src="https://pansci.asia/wp-content/uploads/2016/11/f4ba5977f2f0519a10c9f9bd66cefc89-560x576.png"
+            alt="pokemon"
+          />
+          <span>{isLoggedIn ? userName : 'Login'}</span>
+        </Button>
+      </Tooltip.Trigger>
+      <Tooltip.Content>{isLoggedIn ? 'logout' : undefined}</Tooltip.Content>
+    </Tooltip.Root>
   )
 }
 
@@ -86,7 +93,9 @@ export default function RootLayout({
   const setHello = useHelloStore(state => state.setHello)
   return (
     <div className="flex min-h-screen flex-col">
-      <Alert title="This is a React app" />
+      <Alert.Root>
+        <Alert.Title>This is a React app</Alert.Title>
+      </Alert.Root>
       <header className="flex justify-between p-6">
         <nav className="flex gap-4">
           {headerRoute.map(router => (

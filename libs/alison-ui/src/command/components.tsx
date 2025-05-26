@@ -8,6 +8,10 @@ import { cn } from '@libs/helpers/className'
 import { Command as CommandPrimitive } from 'cmdk'
 import { SearchIcon } from 'lucide-react'
 
+/**
+ * @description Command component
+ * @see https://ui.shadcn.com/docs/components/command
+ */
 function Command({
   className,
   ...props
