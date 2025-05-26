@@ -31,19 +31,19 @@ function DataTable<T>({
   return (
     <div
       className={cn('flex flex-col gap-4', className)}
-      data-element="data-table-container"
+      data-slot="data-table"
+      style={{ '--table-max-height': maxHeight } as React.CSSProperties}
     >
-      <div
-        data-element="data-table-inner"
-        className="relative flex max-h-(--table-max-height) flex-col gap-4 overflow-auto rounded-md border"
-        style={{ '--table-max-height': maxHeight } as React.CSSProperties}
+      <Table.Root
+        containerClassName={cn(
+          'relative flex max-h-(--table-max-height) flex-col gap-4 overflow-auto rounded-md border'
+        )}
       >
-        <Table.Root>
-          <DataTableHeader {...props} />
-          <DataTableBody {...props} />
-          <DataTableFooter {...props} />
-        </Table.Root>
-      </div>
+        <DataTableHeader {...props} />
+        <DataTableBody {...props} />
+        <DataTableFooter {...props} />
+      </Table.Root>
+
       <DataTablePagination {...props} />
     </div>
   )
