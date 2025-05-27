@@ -5,6 +5,9 @@ import * as React from 'react'
 import { cn } from '@libs/helpers/className'
 import * as TabsPrimitive from '@radix-ui/react-tabs'
 
+/**
+ * @see https://ui.shadcn.com/docs/components/tabs
+ */
 function Tabs({
   className,
   ...props
@@ -63,4 +66,9 @@ function TabsContent({
   )
 }
 
-export { Tabs, TabsList, TabsTrigger, TabsContent }
+export {
+  Tabs as Root,
+  TabsList as List,
+  TabsTrigger as Trigger,
+  TabsContent as Content,
+}
