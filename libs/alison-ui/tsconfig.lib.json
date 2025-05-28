@@ -7,7 +7,12 @@
     "noEmit": true,
     "strictNullChecks": true
   },
-  "include": ["**/*.ts", "**/*.tsx", "../../libs/@types/src/*.d.ts"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "../../libs/@types/src/*.d.ts",
+    "../../@libs/alison-ui/src/stepper.tsx"
+  ],
   "exclude": [
     "out-tsc",
     "dist",
