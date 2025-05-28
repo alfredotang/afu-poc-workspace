@@ -28,6 +28,7 @@ export default [
       '**/vite.config.*.timestamp*',
       '**/vitest.config.*.timestamp*',
       '.nx',
+      '**/storybook-static/**',
     ],
   },
   {
