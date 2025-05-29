@@ -50,7 +50,9 @@ export const Overview = () => {
         </Button>
         <Button
           variant="destructive"
-          onClick={() => toast.error('Something went wrong')}
+          onClick={() =>
+            toast.error('Something went wrong', { containerId: toastId })
+          }
         >
           Error
         </Button>
