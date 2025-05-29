@@ -40,13 +40,16 @@ const CalendarDropdown = ({
       <DropdownMenu.Content asChild>
         <ScrollArea className="h-[200px]">
           {dropdownOptions?.map(option => (
-            <DropdownMenu.Item
+            <DropdownMenu.CheckboxItem
               key={option.value}
               disabled={option.disabled}
-              onClick={() => onChange?.(option.value)}
+              checked={value === option.value}
+              onClick={() => {
+                onChange?.(option.value)
+              }}
             >
               {option.label}
-            </DropdownMenu.Item>
+            </DropdownMenu.CheckboxItem>
           ))}
         </ScrollArea>
       </DropdownMenu.Content>
