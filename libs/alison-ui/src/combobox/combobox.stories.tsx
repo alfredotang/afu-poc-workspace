@@ -30,11 +30,10 @@ export default {
   },
 } as Meta<typeof Combobox>
 
-const options: ComboboxOption[] = [
-  { value: 'option1', label: 'Option 1' },
-  { value: 'option2', label: 'Option 2' },
-  { value: 'option3', label: 'Option 3' },
-]
+const options: ComboboxOption[] = Array.from({ length: 100 }, (_, i) => ({
+  value: `option${i + 1}`,
+  label: `Option ${i + 1}`,
+}))
 
 export const Default: StoryObj<typeof Combobox> = {
   args: {

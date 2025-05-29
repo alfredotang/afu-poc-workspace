@@ -52,6 +52,18 @@ export function Combobox({
 }: ComboboxProps) {
   const [open, setOpen] = React.useState(false)
   const selectedOption = options.find(option => option.value === value)
+  const selectedOptionRef = React.useRef<HTMLDivElement>(null)
+
+  React.useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (open) {
+        selectedOptionRef.current?.scrollIntoView({
+          behavior: 'auto',
+        })
+      }
+    }, 1)
+    return () => clearTimeout(timeoutId)
+  }, [open])
 
   return (
     <Popover.Root open={open} onOpenChange={setOpen}>
@@ -90,6 +102,7 @@ export function Combobox({
                 <Command.Item
                   key={option.value}
                   value={option.value}
+                  ref={option.value === value ? selectedOptionRef : undefined}
                   onSelect={currentValue => {
                     const newValue = currentValue === value ? '' : currentValue
                     onChange?.(newValue)
