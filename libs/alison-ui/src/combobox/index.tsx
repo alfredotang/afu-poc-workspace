@@ -5,6 +5,7 @@ import * as React from 'react'
 import { Button } from '@alison-ui/button'
 import * as Command from '@alison-ui/command/components'
 import * as Popover from '@alison-ui/popover/components'
+import { ScrollArea } from '@alison-ui/scroll-area'
 
 import { cn } from '@libs/helpers/className'
 import { Check, ChevronsUpDown } from 'lucide-react'
@@ -98,26 +99,29 @@ export function Combobox({
           <Command.List>
             <Command.Empty>{emptyMessage}</Command.Empty>
             <Command.Group>
-              {options.map(option => (
-                <Command.Item
-                  key={option.value}
-                  value={option.value}
-                  ref={option.value === value ? selectedOptionRef : undefined}
-                  onSelect={currentValue => {
-                    const newValue = currentValue === value ? '' : currentValue
-                    onChange?.(newValue)
-                    setOpen(false)
-                  }}
-                >
-                  {option.label}
-                  <Check
-                    className={cn(
-                      'ml-auto',
-                      value === option.value ? 'opacity-100' : 'opacity-0'
-                    )}
-                  />
-                </Command.Item>
-              ))}
+              <ScrollArea className="h-[200px]">
+                {options.map(option => (
+                  <Command.Item
+                    key={option.value}
+                    value={option.value}
+                    ref={option.value === value ? selectedOptionRef : undefined}
+                    onSelect={currentValue => {
+                      const newValue =
+                        currentValue === value ? '' : currentValue
+                      onChange?.(newValue)
+                      setOpen(false)
+                    }}
+                  >
+                    {option.label}
+                    <Check
+                      className={cn(
+                        'ml-auto',
+                        value === option.value ? 'opacity-100' : 'opacity-0'
+                      )}
+                    />
+                  </Command.Item>
+                ))}
+              </ScrollArea>
             </Command.Group>
           </Command.List>
         </Command.Root>
