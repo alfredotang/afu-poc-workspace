@@ -93,7 +93,7 @@ export function Combobox({
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </Popover.Trigger>
-      <Popover.Content className="w-[200px] p-0">
+      <Popover.Content className="w-(--radix-popover-trigger-width) p-0">
         <Command.Root>
           <Command.Input placeholder={searchPlaceholder} className="h-9" />
           <Command.List>
