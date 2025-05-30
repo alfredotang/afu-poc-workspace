@@ -50,23 +50,26 @@ export function getMinuteTimeOptions({
   hour,
   min,
   max,
+  step = 1,
 }: {
   value: string | undefined
   hour: number
   min: string | undefined
   max: string | undefined
+  step: number | undefined
 }): TimeOption[] {
   const anchorDate = dayjs(value).set('hour', hour).toDate()
-  return Array.from({ length: 60 }, (_, i) => {
+  return Array.from({ length: 60 / step }, (_, i) => {
+    const minuteValue = i * step
     let disabled = false
-    const mDate = dayjs(anchorDate).set('minute', i).toDate()
+    const mDate = dayjs(anchorDate).set('minute', minuteValue).toDate()
     const mStart = dayjs(mDate).startOf('minute').toDate()
     const mEnd = dayjs(mDate).endOf('minute').toDate()
     if (min && dayjs(mEnd).isBefore(min)) disabled = true
     if (max && dayjs(mStart).isAfter(max)) disabled = true
     return {
-      value: i,
-      label: i.toString().padStart(2, '0'),
+      value: minuteValue,
+      label: minuteValue.toString().padStart(2, '0'),
       disabled,
     }
   })

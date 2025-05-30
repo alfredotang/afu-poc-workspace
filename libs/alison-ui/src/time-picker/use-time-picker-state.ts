@@ -37,11 +37,13 @@ export function useTimePickerState({
   min,
   max,
   enableSeconds,
+  step,
 }: {
   value?: string
   min?: string
   max?: string
   enableSeconds?: boolean
+  step?: number
 }) {
   const [hour, setHour] = useState(dayjs(value).get('hour'))
   const [minute, setMinute] = useState(dayjs(value).get('minute'))
@@ -125,7 +127,7 @@ export function useTimePickerState({
       {
         key: 'minutes',
         currentValue: minute,
-        options: getMinuteTimeOptions({ value, hour, min, max }),
+        options: getMinuteTimeOptions({ value, hour, min, max, step }),
         ref: minuteRef,
         onSelect: onMinuteChange,
         enabled: true,
@@ -140,15 +142,16 @@ export function useTimePickerState({
       },
     ].filter(item => item.enabled)
   }, [
-    enableSeconds,
     hour,
-    minute,
-    onHourChange,
-    onMinuteChange,
-    second,
     value,
     min,
     max,
+    onHourChange,
+    minute,
+    step,
+    onMinuteChange,
+    second,
+    enableSeconds,
   ])
 
   const onChangePopoverVisible = useCallback((v: boolean) => {

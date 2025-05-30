@@ -79,3 +79,12 @@ export const MinMaxWithSeconds = () => {
     </div>
   )
 }
+
+export const WithStep = () => {
+  const [value, setValue] = useState(new Date().toISOString())
+  return (
+    <div className="flex items-center gap-4">
+      <TimePicker value={value} onChange={setValue} step={15} />
+    </div>
+  )
+}

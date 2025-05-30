@@ -25,6 +25,10 @@ export type TimePickerProps = {
   enableSeconds?: boolean
   placeholder?: string
   className?: string
+  /**
+   * Step in minutes
+   */
+  step?: number
   onChange?: (date: string) => void
 }
 
@@ -37,6 +41,7 @@ export function TimePicker({
   enableSeconds,
   placeholder = 'Select time',
   className,
+  step,
   onChange,
 }: TimePickerProps) {
   const {
@@ -46,7 +51,7 @@ export function TimePicker({
     minute,
     second,
     onChangePopoverVisible,
-  } = useTimePickerState({ value, min, max, enableSeconds })
+  } = useTimePickerState({ value, min, max, enableSeconds, step })
 
   useEffect(() => {
     const newValue = buildTime({
@@ -82,7 +87,7 @@ export function TimePicker({
           <div className="flex h-56 grow">
             {timeItems.map(item => (
               <ScrollArea className="h-full flex-grow" key={item.key}>
-                <div className="flex grow flex-col items-stretch overflow-y-auto pe-2 pb-48">
+                <div className="flex grow flex-col items-stretch overflow-y-auto pe-2">
                   {item.options.map(option => (
                     <div
                       ref={
