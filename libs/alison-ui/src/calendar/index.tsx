@@ -21,7 +21,9 @@ const CalendarDropdown = ({
   options,
   value,
   onChange,
+  disabled,
 }: {
+  disabled?: boolean
   options?: DropdownOption[]
   value?: string | number | readonly string[] | undefined
   onChange?: (value: DropdownOption['value']) => void
@@ -33,7 +35,12 @@ const CalendarDropdown = ({
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
-        <Button variant="ghost" size="sm" className="font-normal">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="font-normal"
+          disabled={disabled}
+        >
           {options?.find(option => option.value === value)?.label}
         </Button>
       </DropdownMenu.Trigger>
@@ -141,6 +148,7 @@ function Calendar({
         },
         Dropdown: props => (
           <CalendarDropdown
+            disabled={props.disabled}
             value={props.value}
             options={props.options}
             onChange={value => {

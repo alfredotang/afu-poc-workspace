@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
+import { mapMaxTime, mapMinTime } from '@alison-ui/utils'
+
 import dayjs from 'dayjs'
 import timezone from 'dayjs/plugin/timezone'
 import utc from 'dayjs/plugin/utc'
@@ -90,6 +92,16 @@ export function useTimePickerState({
     [value]
   )
 
+  useEffect(() => {
+    if (!value) return
+    const current = dayjs(value)
+    setTime({
+      hour: current.get('hour'),
+      minute: current.get('minute'),
+      second: current.get('second'),
+    })
+  }, [value])
+
   const onHourChange = useCallback(
     (v: TimeOption) => {
       const { minute, second } = time
@@ -108,39 +120,21 @@ export function useTimePickerState({
       const isAfterMax = max && dayjs(newTime).isAfter(max)
 
       if (isBeforeMin) {
-        if (!step || step === 1) {
-          onChangeTime({
-            hour: v.value,
-            minute: dayjs(min).get('minute'),
-            second: dayjs(min).get('second'),
-          })
-          return
-        }
-        const minMinute = dayjs(min).get('minute')
-        const newMinute = Math.ceil(minMinute / step) * step
+        const minTime = dayjs(mapMinTime({ min, minuteStep: step }))
         onChangeTime({
           hour: v.value,
-          minute: newMinute,
-          second: dayjs(min).get('second'),
+          minute: minTime.get('minute'),
+          second: minTime.get('second'),
         })
         return
       }
 
       if (isAfterMax) {
-        if (!step || step === 1) {
-          onChangeTime({
-            hour: v.value,
-            minute: dayjs(max).get('minute'),
-            second: dayjs(max).get('second'),
-          })
-          return
-        }
-        const maxMinute = dayjs(max).get('minute')
-        const newMinute = (Math.ceil(maxMinute / step) - 1) * step
+        const maxTime = dayjs(mapMaxTime({ max, minuteStep: step }))
         onChangeTime({
           hour: v.value,
-          minute: newMinute,
-          second: dayjs(max).get('second'),
+          minute: maxTime.get('minute'),
+          second: maxTime.get('second'),
         })
         return
       }

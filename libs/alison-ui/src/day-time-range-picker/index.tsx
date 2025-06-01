@@ -3,17 +3,15 @@ import { Calendar } from '@alison-ui/calendar'
 import * as Popover from '@alison-ui/popover'
 import { TimePicker } from '@alison-ui/time-picker'
 import type { TimeStep } from '@alison-ui/time-picker/types'
-import {
-  mapCalendarMinMax,
-  mapDayPickerChangeValue,
-  mapDayPickerDisplayValue,
-} from '@alison-ui/utils'
+import { mapCalendarMinMax } from '@alison-ui/utils'
 
 import { cn } from '@libs/helpers/className'
 import dayjs from 'dayjs'
 import timezone from 'dayjs/plugin/timezone'
 import utc from 'dayjs/plugin/utc'
 import { CalendarIcon } from 'lucide-react'
+
+import { getDisplayValue, mapChangeValue } from './utils'
 
 dayjs.extend(timezone)
 dayjs.extend(utc)
@@ -22,7 +20,10 @@ export type DayTimePickerProps = {
   /**
    * ISO 8601 date string
    */
-  value?: string
+  value?: {
+    from?: string
+    to?: string
+  }
   /**
    * ISO 8601 date string
    */
@@ -46,10 +47,10 @@ export type DayTimePickerProps = {
   enableSeconds?: boolean
   timePlaceholder?: string
   formatter?: (date: string) => string
-  onChange?: (date: string) => void
+  onChange?: (date: { from?: string; to?: string }) => void
 }
 
-export function DayTimePicker({
+export function DayTimeRangePicker({
   value,
   min,
   max,
@@ -85,7 +86,7 @@ export function DayTimePicker({
               'text-destructive': invalid,
             })}
           >
-            {mapDayPickerDisplayValue({
+            {getDisplayValue({
               value,
               formatter,
               enableTime,
@@ -97,16 +98,23 @@ export function DayTimePicker({
           <CalendarIcon className="size-4" />
         </Button>
       </Popover.Trigger>
-      <Popover.Content>
+      <Popover.Content className="w-auto">
         <div className="flex flex-col gap-4">
           <Calendar
-            mode="single"
-            selected={value ? dayjs(value).toDate() : undefined}
+            mode="range"
+            selected={
+              value
+                ? {
+                    from: value.from ? dayjs(value.from).toDate() : undefined,
+                    to: value.to ? dayjs(value.to).toDate() : undefined,
+                  }
+                : undefined
+            }
             onSelect={date =>
               onChange?.(
-                mapDayPickerChangeValue({
+                mapChangeValue({
                   value,
-                  newValue: dayjs(date).toISOString(),
+                  newValue: date,
                   enableTime,
                   min,
                   max,
@@ -115,20 +123,45 @@ export function DayTimePicker({
               )
             }
             disabled={mapCalendarMinMax({ min, max })}
+            numberOfMonths={2}
             timeZone={timeZone}
+            showOutsideDays={false}
           />
           {enableTime && (
-            <TimePicker
-              className="w-full"
-              value={value}
-              onChange={onChange}
-              enableSeconds={enableSeconds}
-              placeholder={timePlaceholder}
-              step={minuteStep}
-              timeZone={timeZone}
-              min={min}
-              max={max}
-            />
+            <div className="flex w-full justify-between gap-4">
+              <TimePicker
+                className="w-full"
+                value={value?.from}
+                onChange={date =>
+                  onChange?.({
+                    from: date,
+                    to: value?.to,
+                  })
+                }
+                enableSeconds={enableSeconds}
+                placeholder={timePlaceholder}
+                step={minuteStep}
+                timeZone={timeZone}
+                min={min}
+                max={max}
+              />
+              <TimePicker
+                className="w-full"
+                value={value?.to}
+                onChange={date =>
+                  onChange?.({
+                    from: value?.from,
+                    to: date,
+                  })
+                }
+                enableSeconds={enableSeconds}
+                placeholder={timePlaceholder}
+                step={minuteStep}
+                timeZone={timeZone}
+                min={min}
+                max={max}
+              />
+            </div>
           )}
         </div>
       </Popover.Content>

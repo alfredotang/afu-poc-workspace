@@ -110,7 +110,7 @@ export const WithStep = () => {
 
 export const TimeZone = () => {
   const [value, setValue] = useState<string>(
-    dayjs().set('minute', 30).set('second', 0).toISOString()
+    dayjs('2025/06/01 12:30:15').toISOString()
   )
   const [timeZone, setTimeZone] = useState(dayjs.tz.guess())
   return (
@@ -133,8 +133,18 @@ export const TimeZone = () => {
           timeZone={timeZone}
           enableSeconds
           onChange={setValue}
-          min={dayjs().subtract(1, 'hour').toISOString()}
-          max={dayjs().add(1, 'hour').toISOString()}
+          min={dayjs()
+            .startOf('day')
+            .add(12, 'hour')
+            .add(30, 'minute')
+            .add(15, 'second')
+            .toISOString()}
+          max={dayjs()
+            .endOf('day')
+            .subtract(6, 'hour')
+            .add(30, 'minute')
+            .add(15, 'second')
+            .toISOString()}
         />
         <p className="text-sm">Value: {value}</p>
       </div>
