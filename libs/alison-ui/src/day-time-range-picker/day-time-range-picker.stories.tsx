@@ -58,9 +58,8 @@ export const Overview = () => (
     <Disabled />
     <WithPlaceholder />
     <Invalid />
-    {/* <WithSeconds />
-    <MinMax />
-    <MinMaxWithSeconds /> */}
+    <WithTime />
+    <WithTimeAndSeconds />
   </div>
 )
 
