@@ -5,6 +5,15 @@ import * as React from 'react'
 import { cn } from '@libs/helpers/className'
 import * as SliderPrimitive from '@radix-ui/react-slider'
 
+export type SliderProps = Omit<
+  React.ComponentProps<typeof SliderPrimitive.Root>,
+  'onValueChange' | 'onChange' | 'value'
+> & {
+  invalid?: boolean
+  onChange?: (value: Array<number | undefined>) => void
+  value?: Array<number | undefined>
+}
+
 /**
  * @see https://ui.shadcn.com/docs/components/slider
  */
@@ -14,12 +23,13 @@ function Slider({
   value,
   min = 0,
   max = 100,
+  onChange,
   ...props
-}: React.ComponentProps<typeof SliderPrimitive.Root>) {
+}: SliderProps) {
   const _values = React.useMemo(
     () =>
       Array.isArray(value)
-        ? value
+        ? value.filter(item => item !== undefined)
         : Array.isArray(defaultValue)
           ? defaultValue
           : [min, max],
@@ -30,13 +40,14 @@ function Slider({
     <SliderPrimitive.Root
       data-slot="slider"
       defaultValue={defaultValue}
-      value={value}
+      value={value?.filter(item => item !== undefined) as Array<number>}
       min={min}
       max={max}
       className={cn(
         'relative flex w-full touch-none items-center select-none data-[disabled]:opacity-50 data-[orientation=vertical]:h-full data-[orientation=vertical]:min-h-44 data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col',
         className
       )}
+      onValueChange={onChange}
       {...props}
     >
       <SliderPrimitive.Track

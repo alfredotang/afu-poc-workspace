@@ -8,6 +8,7 @@ import * as Dialog from '@alison-ui/dialog'
 import { Input } from '@alison-ui/input'
 import { RadioGroup } from '@alison-ui/radio-group'
 import { Select } from '@alison-ui/select'
+import { Slider } from '@alison-ui/slider'
 
 import type { Meta } from '@storybook/react'
 
@@ -35,6 +36,8 @@ const schema = y.object({
     })
     .required('Date range is required'),
   age: y.number().required(),
+  slider: y.array(y.number()).required(),
+  rangeSlider: y.array(y.number()).required(),
 })
 
 type FormValues = y.InferType<typeof schema>
@@ -45,6 +48,9 @@ export const Default = () => {
 
   const form = useForm<FormValues>({
     resolver: yupResolver(schema),
+    defaultValues: {
+      rangeSlider: [1, 100],
+    },
   })
 
   const onSubmit = (data: FormValues) => {
@@ -124,6 +130,18 @@ export const Default = () => {
                     ]}
                   />
                 )}
+              />
+              <FormField
+                control={form.control}
+                name="slider"
+                label="Slider"
+                render={({ field }) => <Slider {...field} />}
+              />
+              <FormField
+                control={form.control}
+                name="rangeSlider"
+                label="Range Slider"
+                render={({ field }) => <Slider {...field} />}
               />
             </Card.Content>
           </Card.Root>
