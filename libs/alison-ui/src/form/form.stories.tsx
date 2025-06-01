@@ -74,8 +74,8 @@ export const Default = () => {
                 control={form.control}
                 name="name"
                 label="Name"
-                render={({ field }) => (
-                  <Input {...field} className="w-[200px]" />
+                render={() => (
+                  <Input {...form.register('name')} className="w-[200px]" />
                 )}
               />
               <FormField
