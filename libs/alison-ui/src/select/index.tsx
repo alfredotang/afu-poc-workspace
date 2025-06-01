@@ -1,3 +1,5 @@
+import { Fragment } from 'react'
+
 import {
   Select as SelectRoot,
   SelectContent,
@@ -30,7 +32,10 @@ export type SelectProps = {
   className?: string
   disabled?: boolean
   invalid?: boolean
-}
+} & Omit<
+  React.ComponentProps<typeof SelectTrigger>,
+  'children' | 'onChange' | 'value' | 'asChild'
+>
 
 function Select({
   options,
@@ -41,6 +46,7 @@ function Select({
   className,
   disabled,
   invalid,
+  ...props
 }: SelectProps) {
   return (
     <SelectRoot value={value} onValueChange={onChange}>
@@ -49,13 +55,14 @@ function Select({
         className={className}
         disabled={disabled}
         invalid={invalid}
+        {...props}
       >
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>
         <SelectScrollUpButton />
         {options.map((group, index) => (
-          <>
+          <Fragment key={`group-${index}`}>
             <SelectGroup key={`group-${index}`}>
               {group.groupLabel && (
                 <SelectLabel>{group.groupLabel}</SelectLabel>
@@ -67,7 +74,7 @@ function Select({
               ))}
             </SelectGroup>
             {index < options.length - 1 && <SelectSeparator />}
-          </>
+          </Fragment>
         ))}
         <SelectScrollDownButton />
       </SelectContent>

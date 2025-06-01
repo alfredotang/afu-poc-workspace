@@ -283,9 +283,9 @@ export const PaginationInServerSide = () => {
   })
 
   const table = useReactTable({
-    data: pokemons?.list,
+    data: pokemons?.list ?? [],
     columns: pokemonColumns,
-    pageCount: Math.ceil(pokemons?.total / pagination.pageSize),
+    pageCount: Math.ceil((pokemons?.total ?? 0) / pagination.pageSize),
     getCoreRowModel: getCoreRowModel(),
     onPaginationChange: setPagination,
     manualPagination: true,
@@ -309,19 +309,19 @@ const selectableColumns = [
   selectableColumnHelper.accessor('name', {
     header: ({ table }) => (
       <Checkbox
-        checked={
+        value={
           table.getIsAllPageRowsSelected() ||
           (table.getIsSomePageRowsSelected() ? 'indeterminate' : false)
         }
-        onCheckedChange={value => table.toggleAllPageRowsSelected(!!value)}
+        onChange={value => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"
       />
     ),
     cell: ({ row }) => (
       <Checkbox
         aria-label="Select row"
-        checked={row?.getIsSelected()}
-        onCheckedChange={value => row?.toggleSelected?.(!!value)}
+        value={row?.getIsSelected()}
+        onChange={value => row?.toggleSelected?.(!!value)}
         disabled={!row?.getCanSelect()}
       />
     ),

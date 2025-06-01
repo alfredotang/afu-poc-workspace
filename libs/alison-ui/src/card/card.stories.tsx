@@ -2,7 +2,7 @@ import { Button } from '@alison-ui/button'
 
 import type { Meta } from '@storybook/react'
 
-import * as Card from './components'
+import * as Card from '.'
 
 export default {
   component: Card.Root,

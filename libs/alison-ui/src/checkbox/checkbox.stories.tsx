@@ -1,6 +1,4 @@
-import { useId, useState } from 'react'
-
-import { Label } from '@alison-ui/label'
+import { useState } from 'react'
 
 import type { Meta, StoryObj } from '@storybook/react'
 
@@ -10,7 +8,7 @@ export default {
   component: Checkbox,
   title: 'forms/checkbox',
   argTypes: {
-    checked: {
+    value: {
       control: 'select',
       options: [true, false, 'indeterminate'],
       table: {
@@ -49,7 +47,7 @@ export default {
 
 export const Default: StoryObj<typeof Checkbox> = {
   args: {
-    checked: false,
+    value: false,
     disabled: false,
     invalid: false,
   },
@@ -58,11 +56,11 @@ export const Default: StoryObj<typeof Checkbox> = {
 export const Overview = () => (
   <div className="flex gap-4">
     <Checkbox />
-    <Checkbox checked />
+    <Checkbox value={true} />
     <Checkbox disabled />
-    <Checkbox checked disabled />
-    <Checkbox checked="indeterminate" />
-    <Checkbox checked="indeterminate" disabled />
+    <Checkbox value disabled />
+    <Checkbox value="indeterminate" />
+    <Checkbox value="indeterminate" disabled />
     <Checkbox invalid />
     <Checkbox invalid disabled />
   </div>
@@ -73,16 +71,16 @@ export const Checked = () => {
 
   return (
     <div className="flex flex-col gap-2">
-      <Checkbox checked={checked} onCheckedChange={setChecked} />
-      <Checkbox checked={checked} onCheckedChange={setChecked} disabled />
+      <Checkbox value={checked} onChange={setChecked} />
+      <Checkbox value={checked} onChange={setChecked} disabled />
     </div>
   )
 }
 
 export const Indeterminate = () => (
   <div className="flex flex-col gap-2">
-    <Checkbox checked="indeterminate" />
-    <Checkbox checked="indeterminate" disabled />
+    <Checkbox value="indeterminate" />
+    <Checkbox value="indeterminate" disabled />
   </div>
 )
 
@@ -94,12 +92,5 @@ export const Invalid = () => (
 )
 
 export const WithLabel = () => {
-  const id = useId()
-
-  return (
-    <div className="flex gap-2">
-      <Checkbox id={id} />
-      <Label htmlFor={id}>Checkbox</Label>
-    </div>
-  )
+  return <Checkbox label="Checkbox" />
 }

@@ -17,6 +17,7 @@
     "resolveJsonModule": true,
     "baseUrl": ".",
     "types": ["node", "vite/client"],
+    "strictNullChecks": true,
     "paths": {
       "@alison-ui/*": ["libs/alison-ui/src/*"],
       "@apps/demo-react/*": ["apps/demo-react/src/*"],

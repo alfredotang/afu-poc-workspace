@@ -48,7 +48,10 @@ export type DayTimePickerProps = {
   timePlaceholder?: string
   formatter?: (date: string) => string
   onChange?: (date: { from?: string; to?: string }) => void
-}
+} & Omit<
+  React.ComponentProps<typeof Button>,
+  'children' | 'variant' | 'size' | 'onChange' | 'value'
+>
 
 export function DayTimeRangePicker({
   value,
@@ -65,6 +68,7 @@ export function DayTimeRangePicker({
   timePlaceholder,
   formatter,
   onChange,
+  ...props
 }: DayTimePickerProps) {
   return (
     <Popover.Root>
@@ -79,6 +83,7 @@ export function DayTimeRangePicker({
             },
             className
           )}
+          {...props}
         >
           <span
             className={cn('truncate font-normal', {

@@ -25,7 +25,10 @@ export type ComboboxProps = {
   disabled?: boolean
   invalid?: boolean
   onChange?: (value: string) => void
-}
+} & Omit<
+  React.ComponentProps<typeof Button>,
+  'children' | 'variant' | 'size' | 'onChange' | 'value'
+>
 
 const getComboboxValue = ({
   value,
@@ -50,6 +53,7 @@ export function Combobox({
   disabled,
   invalid,
   onChange,
+  ...props
 }: ComboboxProps) {
   const [open, setOpen] = React.useState(false)
   const selectedOption = options.find(option => option.value === value)
@@ -77,6 +81,7 @@ export function Combobox({
             '!border-destructive text-destructive': invalid,
           })}
           disabled={disabled}
+          {...props}
         >
           <span
             className={cn('truncate font-normal', {

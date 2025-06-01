@@ -17,6 +17,8 @@ import {
   type FieldValues,
 } from 'react-hook-form'
 
+import { getFormFieldError } from './utils'
+
 const Form = FormProvider
 
 type FormFieldContextValue<
@@ -98,14 +100,18 @@ function FormLabel({
     <Label
       data-slot="form-label"
       data-error={!!error}
-      className={cn('data-[error=true]:text-destructive', className)}
+      // 'data-[error=true]:text-destructive'
+      className={cn(className)}
       htmlFor={formItemId}
       {...props}
     />
   )
 }
 
-function FormControl({ ...props }: React.ComponentProps<typeof Slot>) {
+function FormControl({
+  className,
+  ...props
+}: React.ComponentProps<typeof Slot>) {
   const { error, formItemId, formDescriptionId, formMessageId } = useFormField()
 
   return (
@@ -118,6 +124,9 @@ function FormControl({ ...props }: React.ComponentProps<typeof Slot>) {
           : `${formDescriptionId} ${formMessageId}`
       }
       aria-invalid={!!error}
+      data-invalid={!!error}
+      // @ts-expect-error TODO: add invalid prop to Slot
+      invalid={error ? 'true' : undefined}
       {...props}
     />
   )
@@ -138,7 +147,8 @@ function FormDescription({ className, ...props }: React.ComponentProps<'p'>) {
 
 function FormMessage({ className, ...props }: React.ComponentProps<'p'>) {
   const { error, formMessageId } = useFormField()
-  const body = error ? String(error?.message ?? '') : props.children
+  console.log({ error })
+  const body = error ? getFormFieldError(error) : props.children
 
   if (!body) {
     return null
