@@ -1,8 +1,10 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import dayjs from 'dayjs'
+import timezone from 'dayjs/plugin/timezone'
+import utc from 'dayjs/plugin/utc'
 
-import type { TimeOption } from './types'
+import type { TimeOption, TimeStep, TimeStruct } from './types'
 
 import {
   buildTime,
@@ -10,6 +12,15 @@ import {
   getMinuteTimeOptions,
   getSecondTimeOptions,
 } from './utils'
+
+type TimeItem = {
+  key: 'hours' | 'minutes' | 'seconds'
+  currentValue: number | undefined
+  options: TimeOption[]
+  ref: React.RefObject<HTMLDivElement | null>
+  onSelect: (v: TimeOption) => void
+  disabled?: boolean
+}
 
 export type TimePickerProps = {
   /**
@@ -32,126 +43,221 @@ export type TimePickerProps = {
   onChange?: (date: string) => void
 }
 
+dayjs.extend(timezone)
+dayjs.extend(utc)
+
 export function useTimePickerState({
   value,
   min,
   max,
   enableSeconds,
-  step,
+  step = 1,
+  timeZone = dayjs.tz.guess(),
+  onChange,
 }: {
   value?: string
   min?: string
   max?: string
   enableSeconds?: boolean
-  step?: number
+  step?: TimeStep
+  timeZone?: string
+  onChange?: (date: string) => void
 }) {
-  const [hour, setHour] = useState(dayjs(value).get('hour'))
-  const [minute, setMinute] = useState(dayjs(value).get('minute'))
-  const [second, setSecond] = useState(dayjs(value).get('second'))
+  const [time, setTime] = useState<TimeStruct>(() => {
+    const current = dayjs(value)
+    return {
+      hour: current.get('hour'),
+      minute: current.get('minute'),
+      second: current.get('second'),
+    }
+  })
   const [isPopoverVisible, setIsPopoverVisible] = useState(false)
 
   const hourRef = useRef<HTMLDivElement>(null)
   const minuteRef = useRef<HTMLDivElement>(null)
   const secondRef = useRef<HTMLDivElement>(null)
 
+  const onChangeTime = useCallback(
+    (time: TimeStruct) => {
+      setTime(time)
+      const newValue = buildTime({
+        value,
+        time,
+      })
+      onChange?.(newValue)
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [value]
+  )
+
   const onHourChange = useCallback(
     (v: TimeOption) => {
-      if (min) {
-        const newTime = buildTime({
+      const { minute, second } = time
+      const newTime = dayjs(
+        buildTime({
           value,
-          hour: v.value,
-          minute,
-          second,
+          time: {
+            hour: v.value,
+            minute,
+            second,
+          },
         })
-        if (dayjs(newTime).isBefore(min)) {
-          setMinute(dayjs(min).get('minute'))
-          setSecond(dayjs(min).get('second'))
+      )
+
+      const isBeforeMin = min && dayjs(newTime).isBefore(min)
+      const isAfterMax = max && dayjs(newTime).isAfter(max)
+
+      if (isBeforeMin) {
+        if (!step || step === 1) {
+          onChangeTime({
+            hour: v.value,
+            minute: dayjs(min).get('minute'),
+            second: dayjs(min).get('second'),
+          })
+          return
         }
-      }
-      if (max) {
-        const newTime = buildTime({
-          value,
+        const minMinute = dayjs(min).get('minute')
+        const newMinute = Math.ceil(minMinute / step) * step
+        onChangeTime({
           hour: v.value,
-          minute,
-          second,
+          minute: newMinute,
+          second: dayjs(min).get('second'),
         })
-        if (dayjs(newTime).isAfter(max)) {
-          setMinute(dayjs(max).get('minute'))
-          setSecond(dayjs(max).get('second'))
-        }
+        return
       }
-      setHour(v.value)
+
+      if (isAfterMax) {
+        if (!step || step === 1) {
+          onChangeTime({
+            hour: v.value,
+            minute: dayjs(max).get('minute'),
+            second: dayjs(max).get('second'),
+          })
+          return
+        }
+        const maxMinute = dayjs(max).get('minute')
+        const newMinute = (Math.ceil(maxMinute / step) - 1) * step
+        onChangeTime({
+          hour: v.value,
+          minute: newMinute,
+          second: dayjs(max).get('second'),
+        })
+        return
+      }
+
+      onChangeTime({
+        hour: v.value,
+        minute: newTime.get('minute'),
+        second: newTime.get('second'),
+      })
     },
-    [min, max, value, minute, second]
+    [time, min, max, value, step, onChangeTime]
   )
 
   const onMinuteChange = useCallback(
     (v: TimeOption) => {
-      if (min) {
-        const newTime = buildTime({
+      const { hour, second } = time
+      const newTime = dayjs(
+        buildTime({
           value,
-          hour: v.value,
-          minute,
-          second,
+          time: {
+            hour,
+            minute: v.value,
+            second,
+          },
         })
-        if (newTime < min) {
-          setSecond(dayjs(min).get('second'))
-        }
-      }
-      if (max) {
-        const newTime = buildTime({
-          value,
-          hour: v.value,
-          minute,
-          second,
+      )
+
+      const isBeforeMin = min && dayjs(newTime).isBefore(min)
+      const isAfterMax = max && dayjs(newTime).isAfter(max)
+
+      if (isBeforeMin) {
+        onChangeTime({
+          hour,
+          minute: v.value,
+          second: dayjs(min).get('second'),
         })
-        if (dayjs(newTime).isAfter(max)) {
-          setSecond(dayjs(max).get('second'))
-        }
+        return
       }
-      setMinute(v.value)
+      if (isAfterMax) {
+        onChangeTime({
+          hour,
+          minute: v.value,
+          second: dayjs(max).get('second'),
+        })
+        return
+      }
+      onChangeTime({
+        ...time,
+        minute: v.value,
+      })
     },
-    [min, max, value, minute, second]
+    [time, value, min, max, onChangeTime]
+  )
+
+  const onSecondChange = useCallback(
+    (v: TimeOption) => {
+      onChangeTime({
+        ...time,
+        second: v.value,
+      })
+    },
+    [onChangeTime, time]
   )
 
   const timeItems = useMemo(() => {
-    return [
-      {
-        key: 'hours',
-        currentValue: hour,
-        options: getHourTimeOptions({ value, min, max }),
-        ref: hourRef,
-        onSelect: onHourChange,
-        enabled: true,
-      },
-      {
-        key: 'minutes',
-        currentValue: minute,
-        options: getMinuteTimeOptions({ value, hour, min, max, step }),
-        ref: minuteRef,
-        onSelect: onMinuteChange,
-        enabled: true,
-      },
-      {
-        key: 'seconds',
-        currentValue: second,
-        options: getSecondTimeOptions({ value, hour, minute, min, max }),
-        ref: secondRef,
-        onSelect: (v: TimeOption) => setSecond(v.value),
-        enabled: enableSeconds,
-      },
-    ].filter(item => item.enabled)
+    const { hour, minute, second } = time
+    return (
+      [
+        {
+          key: 'hours',
+          currentValue: value ? hour : undefined,
+          options: getHourTimeOptions({ value, min, max, timeZone }),
+          ref: hourRef,
+          onSelect: onHourChange,
+        },
+        {
+          key: 'minutes',
+          currentValue: value ? minute : undefined,
+          options: getMinuteTimeOptions({
+            value,
+            hour,
+            min,
+            max,
+            step,
+            timeZone,
+          }),
+          ref: minuteRef,
+          onSelect: onMinuteChange,
+        },
+        {
+          key: 'seconds',
+          currentValue: value ? second : undefined,
+          options: getSecondTimeOptions({
+            value,
+            hour,
+            minute,
+            min,
+            max,
+            timeZone,
+          }),
+          ref: secondRef,
+          onSelect: onSecondChange,
+          disabled: !enableSeconds,
+        },
+      ] satisfies TimeItem[]
+    ).filter(item => !item.disabled)
   }, [
-    hour,
+    time,
     value,
     min,
     max,
     onHourChange,
-    minute,
     step,
     onMinuteChange,
-    second,
+    onSecondChange,
     enableSeconds,
+    timeZone,
   ])
 
   const onChangePopoverVisible = useCallback((v: boolean) => {
@@ -172,9 +278,6 @@ export function useTimePickerState({
   return {
     isPopoverVisible,
     timeItems,
-    hour,
-    minute,
-    second,
     onChangePopoverVisible,
   }
 }

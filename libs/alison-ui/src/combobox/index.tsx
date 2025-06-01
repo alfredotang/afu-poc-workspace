@@ -12,7 +12,7 @@ import { Check, ChevronsUpDown } from 'lucide-react'
 
 export type ComboboxOption = {
   value: string
-  label: string
+  label: React.ReactNode
 }
 
 export type ComboboxProps = {
@@ -93,7 +93,7 @@ export function Combobox({
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </Popover.Trigger>
-      <Popover.Content className="w-(--radix-popover-trigger-width) p-0">
+      <Popover.Content className="min-w-(--radix-popover-trigger-width) p-0">
         <Command.Root>
           <Command.Input placeholder={searchPlaceholder} className="h-9" />
           <Command.List>

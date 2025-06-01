@@ -1,14 +1,32 @@
 import { useState } from 'react'
 
+import { Combobox } from '@alison-ui/combobox'
+
 import type { Meta } from '@storybook/react'
 
 import dayjs from 'dayjs'
+import timezone from 'dayjs/plugin/timezone'
+import utc from 'dayjs/plugin/utc'
+
+dayjs.extend(timezone)
+dayjs.extend(utc)
 
 import { TimePicker } from '.'
 
 export default {
   component: TimePicker,
   title: 'forms/time-picker',
+  argTypes: {
+    step: {
+      control: {
+        type: 'select',
+        options: [1, 5, 10, 15, 30],
+      },
+      table: {
+        type: { summary: '1 | 5 | 10 | 15 | 30' },
+      },
+    },
+  },
 } satisfies Meta<typeof TimePicker>
 
 export const Overview = () => (
@@ -65,14 +83,14 @@ export const MinMax = () => {
 }
 
 export const MinMaxWithSeconds = () => {
-  const [value, setValue] = useState(new Date().toISOString())
+  const [value, setValue] = useState(dayjs().toISOString())
   return (
     <div className="flex items-center gap-4">
       <TimePicker
         value={value}
         onChange={setValue}
-        min={dayjs().subtract(1, 'hour').toISOString()}
-        max={dayjs().add(1, 'hour').toISOString()}
+        min={dayjs().subtract(1, 'hour').set('second', 15).toISOString()}
+        max={dayjs().add(1, 'hour').set('second', 15).toISOString()}
         enableSeconds
       />
       <p className="text-sm">Value: {value}</p>
@@ -81,10 +99,45 @@ export const MinMaxWithSeconds = () => {
 }
 
 export const WithStep = () => {
-  const [value, setValue] = useState(new Date().toISOString())
+  const [value, setValue] = useState<string>()
   return (
     <div className="flex items-center gap-4">
       <TimePicker value={value} onChange={setValue} step={15} />
+      <p className="text-sm">Value: {value}</p>
+    </div>
+  )
+}
+
+export const TimeZone = () => {
+  const [value, setValue] = useState<string>(
+    dayjs().set('minute', 30).set('second', 0).toISOString()
+  )
+  const [timeZone, setTimeZone] = useState(dayjs.tz.guess())
+  return (
+    <div className="flex flex-col gap-6">
+      <Combobox
+        className="w-[200px]"
+        value={timeZone}
+        onChange={setTimeZone}
+        options={
+          // @ts-expect-error - Intl.supportedValuesOf is not a function
+          Intl.supportedValuesOf('timeZone').map(name => ({
+            label: `${name} (${dayjs().tz(name).format('Z')})`,
+            value: name,
+          }))
+        }
+      />
+      <div className="flex items-center gap-4">
+        <TimePicker
+          value={value}
+          timeZone={timeZone}
+          enableSeconds
+          onChange={setValue}
+          min={dayjs().subtract(1, 'hour').toISOString()}
+          max={dayjs().add(1, 'hour').toISOString()}
+        />
+        <p className="text-sm">Value: {value}</p>
+      </div>
     </div>
   )
 }

@@ -1,22 +1,25 @@
 import dayjs from 'dayjs'
+import timezone from 'dayjs/plugin/timezone'
+import utc from 'dayjs/plugin/utc'
 
-import type { TimeOption } from './types'
+import type { TimeOption, TimeStep, TimeStruct } from './types'
+
+dayjs.extend(timezone)
+dayjs.extend(utc)
 
 export function buildTime({
   value,
-  hour,
-  minute,
-  second,
+  time: { hour, minute, second },
 }: {
   value?: string
-  hour: number
-  minute: number
-  second: number
+  time: TimeStruct
+  timeZone?: string
 }) {
   return dayjs(value)
     .set('hour', hour)
     .set('minute', minute)
     .set('second', second)
+    .set('millisecond', 0)
     .toISOString()
 }
 
@@ -24,25 +27,37 @@ export function getHourTimeOptions({
   value,
   min,
   max,
+  timeZone = dayjs.tz.guess(),
 }: {
   value: string | undefined
   min: string | undefined
   max: string | undefined
+  timeZone?: string
 }): TimeOption[] {
+  const baseDate = dayjs(value)
+
   return Array.from({ length: 24 }, (_, i) => {
+    const hDate = baseDate
+      .set('hour', i)
+      .set('minute', 0)
+      .set('second', 0)
+      .set('millisecond', 0)
+    const hStart = hDate.startOf('hour')
+    const hEnd = hDate.endOf('hour')
+
+    const _min = min ? dayjs(min) : undefined
+    const _max = max ? dayjs(max) : undefined
+
     let disabled = false
-    const hourValue = i
-    const hDate = dayjs(value).set('hour', hourValue).toDate()
-    const hStart = dayjs(hDate).startOf('hour').toDate()
-    const hEnd = dayjs(hDate).endOf('hour').toDate()
-    if (min && dayjs(hEnd).isBefore(min)) disabled = true
-    if (max && dayjs(hStart).isAfter(max)) disabled = true
+    if (_min && hEnd.isBefore(_min)) disabled = true
+    if (_max && hStart.isAfter(_max)) disabled = true
+
     return {
-      value: hourValue,
-      label: hourValue.toString().padStart(2, '0'),
+      value: i,
+      label: hDate.tz(timeZone).format('HH'),
       disabled,
     }
-  })
+  }).sort((a, b) => Number(a.label) - Number(b.label))
 }
 
 export function getMinuteTimeOptions({
@@ -51,28 +66,38 @@ export function getMinuteTimeOptions({
   min,
   max,
   step = 1,
+  timeZone = dayjs.tz.guess(),
 }: {
   value: string | undefined
   hour: number
   min: string | undefined
   max: string | undefined
-  step: number | undefined
+  step?: TimeStep
+  timeZone?: string
 }): TimeOption[] {
-  const anchorDate = dayjs(value).set('hour', hour).toDate()
-  return Array.from({ length: 60 / step }, (_, i) => {
+  const baseDate = dayjs(value)
+    .set('hour', hour)
+    .set('second', 0)
+    .set('millisecond', 0)
+  const _min = min ? dayjs(min) : undefined
+  const _max = max ? dayjs(max) : undefined
+
+  return Array.from({ length: Math.ceil(60 / step) }, (_, i) => {
     const minuteValue = i * step
+    const mDate = baseDate.set('minute', minuteValue)
+    const mStart = mDate.startOf('minute')
+    const mEnd = mDate.endOf('minute')
+
     let disabled = false
-    const mDate = dayjs(anchorDate).set('minute', minuteValue).toDate()
-    const mStart = dayjs(mDate).startOf('minute').toDate()
-    const mEnd = dayjs(mDate).endOf('minute').toDate()
-    if (min && dayjs(mEnd).isBefore(min)) disabled = true
-    if (max && dayjs(mStart).isAfter(max)) disabled = true
+    if (_min && mEnd.isBefore(_min)) disabled = true
+    if (_max && mStart.isAfter(_max)) disabled = true
+
     return {
       value: minuteValue,
-      label: minuteValue.toString().padStart(2, '0'),
+      label: mDate.tz(timeZone).format('mm'),
       disabled,
     }
-  })
+  }).sort((a, b) => Number(a.label) - Number(b.label))
 }
 
 export function getSecondTimeOptions({
@@ -81,28 +106,50 @@ export function getSecondTimeOptions({
   minute,
   min,
   max,
+  timeZone = dayjs.tz.guess(),
 }: {
   value: string | undefined
   hour: number
   minute: number
   min: string | undefined
   max: string | undefined
+  timeZone?: string
 }): TimeOption[] {
-  const anchorDate = dayjs(value)
+  const baseDate = dayjs(value)
     .set('hour', hour)
     .set('minute', minute)
-    .toDate()
-  const _min = min ? dayjs(min).set('millisecond', 0).toDate() : undefined
-  const _max = max ? dayjs(max).set('millisecond', 0).toDate() : undefined
+    .set('millisecond', 0)
+  const _min = min ? dayjs(min).set('millisecond', 0) : undefined
+  const _max = max ? dayjs(max).set('millisecond', 0) : undefined
+
   return Array.from({ length: 60 }, (_, i) => {
+    const sDate = baseDate.set('second', i)
+
     let disabled = false
-    const sDate = dayjs(anchorDate).set('second', i).toDate()
-    if (_min && sDate < _min) disabled = true
-    if (_max && sDate > _max) disabled = true
+    if (_min && sDate.isBefore(_min)) disabled = true
+    if (_max && sDate.isAfter(_max)) disabled = true
+
     return {
       value: i,
-      label: i.toString().padStart(2, '0'),
+      label: sDate.tz(timeZone).format('ss'),
       disabled,
     }
-  })
+  }).sort((a, b) => Number(a.label) - Number(b.label))
+}
+
+export const getDisplayValue = ({
+  value,
+  enableSeconds = false,
+  placeholder = 'Select time',
+  timeZone = dayjs.tz.guess(),
+}: {
+  value?: string
+  enableSeconds?: boolean
+  placeholder?: string
+  timeZone?: string
+}) => {
+  if (!value) return placeholder
+  return dayjs(value)
+    .tz(timeZone)
+    .format(enableSeconds ? 'HH:mm:ss' : 'HH:mm')
 }

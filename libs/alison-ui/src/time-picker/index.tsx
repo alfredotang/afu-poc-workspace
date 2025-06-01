@@ -1,11 +1,9 @@
-import { useEffect } from 'react'
-
 import * as Popover from '@alison-ui/popover'
 import { ScrollArea } from '@alison-ui/scroll-area'
 
 import { DisplayButton, TimeItem } from './components'
+import { TimeStep } from './types'
 import { useTimePickerState } from './use-time-picker-state'
-import { buildTime } from './utils'
 
 export type TimePickerProps = {
   /**
@@ -27,8 +25,11 @@ export type TimePickerProps = {
   className?: string
   /**
    * Step in minutes
+   * @default 1
+   * @optional 1, 5, 10, 15, 30
    */
-  step?: number
+  step?: TimeStep
+  timeZone?: string
   onChange?: (date: string) => void
 }
 
@@ -42,27 +43,19 @@ export function TimePicker({
   placeholder = 'Select time',
   className,
   step,
+  timeZone,
   onChange,
 }: TimePickerProps) {
-  const {
-    isPopoverVisible,
-    timeItems,
-    hour,
-    minute,
-    second,
-    onChangePopoverVisible,
-  } = useTimePickerState({ value, min, max, enableSeconds, step })
-
-  useEffect(() => {
-    const newValue = buildTime({
+  const { isPopoverVisible, timeItems, onChangePopoverVisible } =
+    useTimePickerState({
       value,
-      hour,
-      minute,
-      second,
+      min,
+      max,
+      enableSeconds,
+      step,
+      timeZone,
+      onChange,
     })
-    onChange?.(newValue)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hour, minute, second, value])
 
   return (
     <Popover.Root
@@ -79,6 +72,7 @@ export function TimePicker({
             placeholder={placeholder}
             invalid={invalid}
             open={isPopoverVisible}
+            timeZone={timeZone}
           />
         </div>
       </Popover.Trigger>

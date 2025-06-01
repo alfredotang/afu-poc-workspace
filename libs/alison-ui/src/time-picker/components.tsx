@@ -1,10 +1,11 @@
 import { Button } from '@alison-ui/button'
 
 import { cn } from '@libs/helpers/className'
-import dayjs from 'dayjs'
 import { ClockIcon, CheckIcon } from 'lucide-react'
 
 import type { TimeOption } from './types'
+
+import { getDisplayValue } from './utils'
 
 export const TimeItem = ({
   option,
@@ -43,6 +44,7 @@ export const DisplayButton = ({
   open,
   className,
   onClick,
+  timeZone,
 }: {
   value?: string
   enableSeconds?: boolean
@@ -51,6 +53,7 @@ export const DisplayButton = ({
   invalid?: boolean
   open?: boolean
   className?: string
+  timeZone?: string
   onClick?: () => void
 }) => {
   return (
@@ -60,7 +63,7 @@ export const DisplayButton = ({
       aria-expanded={open}
       disabled={disabled}
       className={cn(
-        'flex items-center justify-normal gap-2 font-normal',
+        'flex min-w-[124px] items-center justify-normal gap-2 font-normal',
         {
           '!border-destructive text-destructive': invalid,
         },
@@ -75,9 +78,7 @@ export const DisplayButton = ({
           'text-destructive': invalid,
         })}
       >
-        {value
-          ? dayjs(value).format(enableSeconds ? 'HH:mm:ss' : 'HH:mm')
-          : placeholder}
+        {getDisplayValue({ value, enableSeconds, placeholder, timeZone })}
       </span>
     </Button>
   )
