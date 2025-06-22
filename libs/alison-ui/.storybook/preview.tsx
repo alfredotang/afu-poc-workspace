@@ -1,8 +1,10 @@
 import './storybook.css'
+
 import React from 'react'
 
 import type { Preview } from '@storybook/react'
 
+import { withThemeByDataAttribute } from '@storybook/addon-themes'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 const queryClient = new QueryClient({
@@ -31,6 +33,14 @@ const preview: Preview = {
         </QueryClientProvider>
       </>
     ),
+    withThemeByDataAttribute({
+      themes: {
+        light: 'light',
+        dark: 'dark',
+      },
+      defaultTheme: 'light',
+      attributeName: 'dark',
+    }),
   ],
 }
 
