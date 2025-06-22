@@ -246,12 +246,12 @@ export function useTimePickerState({
     value,
     min,
     max,
+    timeZone,
     onHourChange,
     step,
     onMinuteChange,
     onSecondChange,
     enableSeconds,
-    timeZone,
   ])
 
   const onChangePopoverVisible = useCallback((v: boolean) => {

@@ -73,7 +73,7 @@ export const Default = () => {
               <FormField
                 control={form.control}
                 name="name"
-                label="Name"
+                label="Container Name"
                 render={() => (
                   <Input {...form.register('name')} className="w-[200px]" />
                 )}

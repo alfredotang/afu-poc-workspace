@@ -10,7 +10,7 @@ export default {
 export const Default = () => (
   <ScrollArea className="h-72 w-48 rounded-md border">
     <ul className="divide-y">
-      {Array.from({ length: 100 }, (_, i) => i).map(i => (
+      {Array.from({ length: 5000 }, (_, i) => i).map(i => (
         <li key={i} className="text-center">
           {i}
         </li>
